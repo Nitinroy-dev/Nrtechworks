@@ -4,6 +4,12 @@ import { useState } from "react";
 import heroVideo from "../assets/hero.mp4.asset.json";
 import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
+// Lovable CDN assets (/__l5e/...) are only served by Lovable's hosting.
+// When deployed elsewhere (e.g. Netlify), prefix with the absolute origin.
+const ASSET_ORIGIN = "https://59429260-2ffa-410a-abf8-f925515c6774.lovableproject.com";
+const heroVideoUrl = `${ASSET_ORIGIN}${heroVideo.url}`;
+const thankyouVideoUrl = `${ASSET_ORIGIN}${thankyouVideo.url}`;
+
 export const Route = createFileRoute("/")({
   component: Index,
 });
@@ -138,7 +144,7 @@ function Hero() {
         </div>
         <div className="relative">
           <video
-            src={heroVideo.url}
+            src={heroVideoUrl}
             autoPlay
             muted
             loop
@@ -385,7 +391,7 @@ function ThankYouModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <video
-          src={thankyouVideo.url}
+          src={thankyouVideoUrl}
           autoPlay
           muted
           loop
