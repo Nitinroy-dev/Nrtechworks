@@ -269,7 +269,6 @@ function Testimonials() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
       <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
