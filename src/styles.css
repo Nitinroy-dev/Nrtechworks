@@ -63,8 +63,14 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --background: #f5f1e8;
+  --foreground: #0f2a1d;
+  --cream: #f5f1e8;
+  --cream-2: #efe9dc;
+  --ink: #0f2a1d;
+  --ink-2: #1a3a2a;
+  --muted-ink: #5a6b60;
+  --gold: #b8935a;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
