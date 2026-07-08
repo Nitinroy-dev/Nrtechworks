@@ -373,7 +373,7 @@ function Footer() {
             <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Contact</div>
             <ul className="mt-5 space-y-3 text-[15px] text-[#f5f1e8]/85">
               <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f5f1e8]/60" /><a href="mailto:nitinroy.hireme@gmail.com" className="hover:text-[#b8935a] transition">nitinroy.hireme@gmail.com</a></li>
-              <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919800000000" className="hover:text-[#b8935a] transition">+91 98XXX XXXXX</a></li>
+              <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919716087278" className="hover:text-[#b8935a] transition">+91 97160 87278</a></li>
               <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-[#f5f1e8]/60" />Delhi NCR, India</li>
             </ul>
           </div>
@@ -399,10 +399,7 @@ function Footer() {
 
         <div className="mt-16 pt-6 border-t border-[#f5f1e8]/15 flex flex-wrap items-center justify-between gap-4 text-xs text-[#f5f1e8]/60">
           <div>© {new Date().getFullYear()} Nr Techworks. All rights reserved.</div>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-[#f5f1e8] transition">Admin</a>
-            <span>Crafted with intent.</span>
-          </div>
+          <div>Crafted by Nr Techworks.</div>
         </div>
       </div>
     </footer>
