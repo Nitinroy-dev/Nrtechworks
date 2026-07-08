@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import heroVideo from "../assets/hero.mp4.asset.json";
 import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
@@ -13,6 +13,45 @@ const thankyouVideoUrl = `${ASSET_ORIGIN}${thankyouVideo.url}`;
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+// --- Scroll reveal wrapper ---
+function Reveal({
+  children,
+  delay = 0,
+  as: Tag = "div",
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  as?: "div" | "section" | "figure" | "h1" | "h2" | "h3" | "p" | "span" | "li";
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).setAttribute("data-reveal", "in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const style = { "--reveal-delay": `${delay}ms` } as CSSProperties;
+  const Component = Tag as any;
+  return (
+    <Component ref={ref as any} data-reveal="" style={style} className={className}>
+      {children}
+    </Component>
+  );
+}
 
 const NAV = [
   { label: "Services", href: "#services" },
