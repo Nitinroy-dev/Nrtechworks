@@ -156,7 +156,7 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.animate-marquee { animation: marquee 60s linear infinite; }
+.animate-marquee { animation: marquee 25s linear infinite; }
 
 /* --- Scroll reveal --- */
 [data-reveal] {
