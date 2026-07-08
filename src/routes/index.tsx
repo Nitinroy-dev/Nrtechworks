@@ -1,24 +1,366 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRight, Sparkles } from "lucide-react";
+import { useState } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const NAV = [
+  { label: "Services", href: "#services" },
+  { label: "Process", href: "#process" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Contact", href: "#contact" },
+];
+
+const SERVICES = [
+  { n: "01", tag: "Core", title: "Web Design & Development", desc: "Landing pages, marketing sites, e-commerce — custom-built and mobile-first." },
+  { n: "02", tag: "Core", title: "Web Applications", desc: "Dashboards, CRMs, MVPs, and SaaS products engineered for real users." },
+  { n: "03", title: "UI / UX Design", desc: "Wireframes, prototypes, and polished interfaces that convert." },
+  { n: "04", title: "Search Engine Optimisation", desc: "On-page, off-page and technical SEO with a measurable keyword strategy." },
+  { n: "05", title: "Meta Ads", desc: "Facebook & Instagram campaigns engineered for ROI, not vanity metrics." },
+  { n: "06", title: "Social Media", desc: "Content planning, design systems, and community engagement." },
+  { n: "07", title: "API & Integrations", desc: "Payment gateways, WhatsApp, CRMs — connected the right way." },
+  { n: "08", title: "Branding", desc: "Logo systems, brand identity kits, and collateral that scale." },
+  { n: "09", title: "AI-Powered Tools", desc: "Chatbots, workflow automation, and smart product features." },
+  { n: "10", title: "Maintenance & Support", desc: "Hosting, updates, backups, security and bug fixes on retainer." },
+];
+
+const PROCESS = [
+  { n: "01", title: "Discovery & Strategy", desc: "We start with your business goals, users, and constraints — then define a measurable brief." },
+  { n: "02", title: "UI / UX Design", desc: "Wireframes evolve into polished, brand-aligned interfaces reviewed collaboratively." },
+  { n: "03", title: "Development & Integration", desc: "Clean, scalable code with the integrations your business actually needs." },
+  { n: "04", title: "Testing & Launch", desc: "Rigorous QA, performance tuning and a calm, controlled launch." },
+  { n: "05", title: "Ongoing Support", desc: "We stay on as your long-term partner — improving, iterating and maintaining." },
+];
+
+const STATS = [
+  { v: "10+", l: "Services under one roof" },
+  { v: "2026", l: "Independent studio, est." },
+  { v: "1:1", l: "Founder-led engagements" },
+  { v: "100%", l: "Founder-led delivery" },
+];
+
+const WHY = [
+  { title: "Founder-led. No hand-offs.", desc: "You work directly with the person who designed and built your product." },
+  { title: "Design + Engineering in one team.", desc: "Fewer meetings, faster iterations, and a truly cohesive final result." },
+  { title: "Built for founders, not committees.", desc: "We move at the speed of a startup because we are one — for you." },
+  { title: "Fixed-scope. Fixed pricing.", desc: "You'll know exactly what you're getting, what it costs, and when it ships." },
+];
+
+const TESTIMONIALS = [
+  { quote: "The clarity Nr Techworks brought to our product roadmap was worth the engagement on day one. Their taste is unmatched.", name: "Ananya Rao", role: "Founder, Studio Ora", img: "https://images.unsplash.com/photo-1573497019236-17f8177b81e8?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" },
+  { quote: "They delivered a dashboard that felt like a product from a Series B startup. Considered, fast, and beautifully engineered.", name: "Rohan Mehta", role: "Head of Ops, Northline", img: "https://images.pexels.com/photos/27086922/pexels-photo-27086922.jpeg?auto=compress&cs=tinysrgb&w=400" },
+  { quote: "From branding to launch, one team. No hand-offs, no gaps. It's the way agencies should have always worked.", name: "Priya Kapoor", role: "Marketing Lead, Halcyon", img: "https://images.pexels.com/photos/37148308/pexels-photo-37148308.jpeg?auto=compress&cs=tinysrgb&w=400" },
+];
+
+const MARQUEE = ["Premium Digital Services", "Design + Engineering", "AI-Native Products", "Brand Systems", "SEO & Growth", "Bespoke Applications"];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <div className="min-h-screen bg-[#f5f1e8] text-[#0f2a1d]">
+      <Header />
+      <Hero />
+      <Marquee />
+      <Services />
+      <Process />
+      <Why />
+      <Testimonials />
+      <Contact />
+      <Footer />
+    </div>
+  );
+}
+
+function Header() {
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="sticky top-0 z-40 bg-[#f5f1e8]/85 backdrop-blur border-b border-[#0f2a1d]/5">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 h-16 md:h-20 flex items-center justify-between gap-4">
+        <a href="#" className="font-serif text-xl md:text-2xl tracking-tight">
+          Nr <span className="italic">Techworks</span><span className="text-[#b8935a]">.</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-8">
+          {NAV.map((n) => (
+            <a key={n.href} href={n.href} className="text-sm text-[#0f2a1d]/80 hover:text-[#0f2a1d] transition">{n.label}</a>
+          ))}
+        </nav>
+        <a href="#contact" className="hidden md:inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-2.5 text-sm hover:bg-[#1a3a2a] transition">
+          Book a Call <ArrowUpRight className="h-4 w-4" />
+        </a>
+        <button className="md:hidden p-2 -mr-2" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
+          <div className="w-6 h-0.5 bg-[#0f2a1d] mb-1.5" />
+          <div className="w-6 h-0.5 bg-[#0f2a1d] mb-1.5" />
+          <div className="w-6 h-0.5 bg-[#0f2a1d]" />
+        </button>
+      </div>
+      {open && (
+        <div className="md:hidden border-t border-[#0f2a1d]/10 bg-[#f5f1e8]">
+          <div className="px-5 py-4 flex flex-col gap-3">
+            {NAV.map((n) => (
+              <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="py-2 text-[#0f2a1d]">{n.label}</a>
+            ))}
+            <a href="#contact" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-3 text-sm">
+              Book a Call <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 md:px-8 pt-10 md:pt-16 pb-16 md:pb-24">
+      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 items-start">
+        <div>
+          <div className="flex items-center gap-2 text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/70">
+            <Sparkles className="h-4 w-4 text-[#b8935a]" />
+            Independent Digital Studio · Est. 2026
+          </div>
+          <h1 className="mt-6 font-serif text-[42px] leading-[1.05] sm:text-6xl lg:text-[80px] tracking-tight">
+            We build calm, <em className="italic font-normal">considered</em> digital products for modern brands.
+          </h1>
+          <p className="mt-6 max-w-xl text-[15px] md:text-base text-[#0f2a1d]/70 leading-relaxed">
+            Nr Techworks is a small, focused team designing and engineering premium websites, applications and brand systems — end-to-end, without the agency overhead.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#contact" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-6 py-3 text-sm hover:bg-[#1a3a2a] transition">
+              Start a Project <ArrowUpRight className="h-4 w-4" />
+            </a>
+            <a href="#services" className="inline-flex items-center gap-2 rounded-full border border-[#0f2a1d]/30 px-6 py-3 text-sm hover:bg-[#0f2a1d]/5 transition">
+              Explore Services
+            </a>
+          </div>
+        </div>
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=940&q=80"
+            alt="Circuit board — technology craft"
+            className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl"
+            loading="lazy"
+          />
+          <div className="absolute -bottom-6 left-6 md:-bottom-8 md:-left-8 bg-[#f5f1e8] border border-[#0f2a1d]/10 rounded-md px-5 py-3 shadow-lg">
+            <div className="text-[11px] uppercase tracking-widest text-[#0f2a1d]/60">Now Booking</div>
+            <div className="font-serif text-lg mt-0.5">Q1 · 2026 Projects</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Marquee() {
+  const items = [...MARQUEE, ...MARQUEE];
+  return (
+    <div className="border-y border-[#0f2a1d]/10 bg-[#efe9dc] overflow-hidden py-5">
+      <div className="flex gap-10 animate-marquee whitespace-nowrap font-serif text-2xl md:text-3xl">
+        {items.map((t, i) => (
+          <span key={i} className="flex items-center gap-10 shrink-0">
+            {t}
+            <span className="text-[#b8935a]">✦</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ eyebrow, title }: { eyebrow: string; title: React.ReactNode }) {
+  return (
+    <div className="max-w-3xl">
+      <div className="text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/60">— {eyebrow}</div>
+      <h2 className="mt-4 font-serif text-4xl md:text-6xl leading-[1.05] tracking-tight">{title}</h2>
+    </div>
+  );
+}
+
+function Services() {
+  return (
+    <section id="services" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+      <SectionHeader eyebrow="01 · What We Do" title={<>A full studio, <em className="italic font-normal">under one roof.</em></>} />
+      <p className="mt-6 max-w-2xl text-[#0f2a1d]/70">We handle every layer of your digital presence — from the first brand mark to the last line of production code. Two services are our core craft; the rest are natural extensions of them.</p>
+      <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#0f2a1d]/10 border border-[#0f2a1d]/10">
+        {SERVICES.map((s) => (
+          <div key={s.n} className="bg-[#f5f1e8] p-7 md:p-8 min-h-[220px] flex flex-col">
+            <div className="flex items-center justify-between text-xs">
+              {s.tag ? <span className="uppercase tracking-widest text-[#b8935a]">{s.tag}</span> : <span />}
+              <span className="text-[#0f2a1d]/40 tabular-nums">{s.n}</span>
+            </div>
+            <h3 className="mt-6 font-serif text-2xl">{s.title}</h3>
+            <p className="mt-3 text-sm text-[#0f2a1d]/70 leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section id="process" className="bg-[#0f2a1d] text-[#f5f1e8]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+        <div className="max-w-3xl">
+          <div className="text-[13px] uppercase tracking-[0.14em] text-[#f5f1e8]/60">— 02 · How We Work</div>
+          <h2 className="mt-4 font-serif text-4xl md:text-6xl leading-[1.05]">A five-step process, <em className="italic font-normal">no surprises.</em></h2>
+          <p className="mt-6 text-[#f5f1e8]/70">Every engagement follows the same rigorous, transparent structure. You'll always know what's happening this week, and what's coming next.</p>
+        </div>
+        <div className="mt-14 divide-y divide-[#f5f1e8]/15 border-y border-[#f5f1e8]/15">
+          {PROCESS.map((p) => (
+            <div key={p.n} className="grid md:grid-cols-[100px_1fr_2fr] gap-4 md:gap-10 py-8 md:py-10 items-start">
+              <div className="text-[#b8935a] font-serif text-xl tabular-nums">{p.n}</div>
+              <h3 className="font-serif text-2xl md:text-3xl">{p.title}</h3>
+              <p className="text-[#f5f1e8]/70 leading-relaxed">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Why() {
+  return (
+    <section className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+      <SectionHeader eyebrow="04 · Why Nr Techworks" title={<>The studio you'd <em className="italic font-normal">actually recommend.</em></>} />
+      <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 border-y border-[#0f2a1d]/15 py-10">
+        {STATS.map((s) => (
+          <div key={s.l}>
+            <div className="font-serif text-4xl md:text-5xl">{s.v}</div>
+            <div className="mt-2 text-xs md:text-sm text-[#0f2a1d]/70">{s.l}</div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-14 grid md:grid-cols-2 gap-x-14 gap-y-10">
+        {WHY.map((w) => (
+          <div key={w.title}>
+            <h3 className="font-serif text-2xl md:text-3xl">{w.title}</h3>
+            <p className="mt-3 text-[#0f2a1d]/70 leading-relaxed">{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  return (
+    <section id="testimonials" className="bg-[#efe9dc]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+        <SectionHeader eyebrow="03 · Voices" title={<>Words from <em className="italic font-normal">the people we've built with.</em></>} />
+        <div className="mt-14 grid md:grid-cols-3 gap-6">
+          {TESTIMONIALS.map((t) => (
+            <figure key={t.name} className="bg-[#f5f1e8] border border-[#0f2a1d]/10 p-7 flex flex-col">
+              <blockquote className="font-serif text-xl leading-snug flex-1">"{t.quote}"</blockquote>
+              <figcaption className="mt-6 flex items-center gap-3">
+                <img src={t.img} alt={t.name} loading="lazy" className="w-12 h-12 rounded-full object-cover" />
+                <div>
+                  <div className="text-sm font-medium">{t.name}</div>
+                  <div className="text-xs text-[#0f2a1d]/60">{t.role}</div>
+                </div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  const [sent, setSent] = useState(false);
+  return (
+    <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+      <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
+      <p className="mt-6 max-w-2xl text-[#0f2a1d]/70">We're currently accepting a limited number of new engagements for Q1 2026. Share the basics below and we'll get back to you within two business days.</p>
+
+      <div className="mt-14 grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
+        <div className="space-y-8">
+          {[
+            { l: "Email", v: "nitinroy.hireme@gmail.com", href: "mailto:nitinroy.hireme@gmail.com" },
+            { l: "Phone", v: "+91 98XXX XXXXX", href: "tel:+919800000000" },
+            { l: "Studio", v: "Delhi NCR, India" },
+          ].map((c) => (
+            <div key={c.l} className="border-t border-[#0f2a1d]/15 pt-4">
+              <div className="text-xs uppercase tracking-widest text-[#0f2a1d]/50">{c.l}</div>
+              {c.href ? (
+                <a href={c.href} className="mt-2 block font-serif text-xl hover:text-[#b8935a] transition">{c.v}</a>
+              ) : (
+                <div className="mt-2 font-serif text-xl">{c.v}</div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <form
+          className="space-y-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSent(true);
+          }}
+        >
+          <div className="grid sm:grid-cols-2 gap-5">
+            <Field label="Full Name" name="name" required />
+            <Field label="Email" name="email" type="email" required />
+          </div>
+          <Field label="Phone (optional)" name="phone" />
+          <div>
+            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Service Interested</label>
+            <select required className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+              <option value="">Select…</option>
+              {SERVICES.map((s) => <option key={s.title}>{s.title}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Budget Range</label>
+            <select className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+              <option value="">Select…</option>
+              <option>Under ₹50,000</option>
+              <option>₹50,000 – ₹1,50,000</option>
+              <option>₹1,50,000 – ₹5,00,000</option>
+              <option>₹5,00,000 – ₹15,00,000</option>
+              <option>₹15,00,000+</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Project Details</label>
+            <textarea rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
+          </div>
+          <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
+            <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
+            <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
+              {sent ? "Sent — thank you" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
+}
+
+function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+  return (
+    <div>
+      <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60" htmlFor={name}>{label}</label>
+      <input
+        id={name}
+        name={name}
+        type={type}
+        required={required}
+        className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]"
       />
     </div>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-[#0f2a1d]/15">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-[#0f2a1d]/70">
+        <div className="font-serif text-lg text-[#0f2a1d]">Nr <span className="italic">Techworks</span><span className="text-[#b8935a]">.</span></div>
+        <div>© {new Date().getFullYear()} Nr Techworks. All rights reserved.</div>
+      </div>
+    </footer>
   );
 }
