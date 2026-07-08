@@ -274,6 +274,32 @@ function Testimonials() {
 }
 
 function Contact() {
+  const [sending, setSending] = useState(false);
+  const [showThanks, setShowThanks] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    setSending(true);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      form.reset();
+      setShowThanks(true);
+    } catch (err) {
+      setError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
       <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
@@ -299,8 +325,7 @@ function Contact() {
 
         <form
           className="space-y-5"
-          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
-          method="POST"
+          onSubmit={handleSubmit}
         >
           {/* FormSubmit config */}
           <input type="hidden" name="_subject" value="New enquiry from Nr Techworks site" />
@@ -314,14 +339,14 @@ function Contact() {
           <Field label="Phone (optional)" name="phone" />
           <div>
             <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Service Interested</label>
-            <select required className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+            <select name="service" required className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
               <option value="">Select…</option>
               {SERVICES.map((s) => <option key={s.title}>{s.title}</option>)}
             </select>
           </div>
           <div>
             <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Budget Range</label>
-            <select className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+            <select name="budget" className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
               <option value="">Select…</option>
               <option>Under ₹50,000</option>
               <option>₹50,000 – ₹1,50,000</option>
@@ -332,17 +357,53 @@ function Contact() {
           </div>
           <div>
             <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Project Details</label>
-            <textarea rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
+            <textarea name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
           </div>
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
-            <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
-            <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
-              Send Enquiry <ArrowUpRight className="h-4 w-4" />
+            <p className="text-xs text-[#0f2a1d]/60">{error ? <span className="text-red-600">{error}</span> : "We reply within 48 hours."}</p>
+            <button type="submit" disabled={sending} className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition disabled:opacity-60">
+              {sending ? "Sending…" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
       </div>
+
+      {showThanks && <ThankYouModal onClose={() => setShowThanks(false)} />}
     </section>
+  );
+}
+
+function ThankYouModal({ onClose }: { onClose: () => void }) {
+  const goHome = () => {
+    onClose();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={goHome}>
+      <div
+        className="relative w-full max-w-lg bg-[#f5f1e8] rounded-2xl overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <video
+          src={thankyouVideo.url}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-auto block bg-black"
+        />
+        <div className="p-6 text-center">
+          <div className="font-serif text-2xl text-[#0f2a1d]">Thank you!</div>
+          <p className="mt-2 text-sm text-[#0f2a1d]/70">Your enquiry has been received. We'll get back to you within 48 hours.</p>
+          <button
+            onClick={goHome}
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition"
+          >
+            Back to Homepage
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
