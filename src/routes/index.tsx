@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
 import { useState } from "react";
+import heroVideo from "../assets/hero.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -135,11 +136,14 @@ function Hero() {
           </div>
         </div>
         <div className="relative">
-          <img
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=940&q=80"
-            alt="Circuit board — technology craft"
-            className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl"
-            loading="lazy"
+          <video
+            src={heroVideo.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl bg-[#0f2a1d]"
           />
           <div className="absolute -bottom-6 left-6 md:-bottom-8 md:-left-8 bg-[#f5f1e8] border border-[#0f2a1d]/10 rounded-md px-5 py-3 shadow-lg">
             <div className="text-[11px] uppercase tracking-widest text-[#0f2a1d]/60">Now Booking</div>
