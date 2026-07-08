@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
 import { useState } from "react";
 import heroVideo from "../assets/hero.mp4.asset.json";
+import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
