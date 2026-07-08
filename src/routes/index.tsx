@@ -144,7 +144,7 @@ function Hero() {
         </div>
         <div className="relative">
           <video
-            src={heroVideo.url}
+            src={heroVideoUrl}
             autoPlay
             muted
             loop
@@ -391,7 +391,7 @@ function ThankYouModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <video
-          src={thankyouVideo.url}
+          src={thankyouVideoUrl}
           autoPlay
           muted
           loop
