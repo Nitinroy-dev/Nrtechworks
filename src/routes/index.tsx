@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import heroVideo from "../assets/hero.mp4.asset.json";
 import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
@@ -13,6 +13,45 @@ const thankyouVideoUrl = `${ASSET_ORIGIN}${thankyouVideo.url}`;
 export const Route = createFileRoute("/")({
   component: Index,
 });
+
+// --- Scroll reveal wrapper ---
+function Reveal({
+  children,
+  delay = 0,
+  as: Tag = "div",
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  as?: "div" | "section" | "figure" | "h1" | "h2" | "h3" | "p" | "span" | "li";
+  className?: string;
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).setAttribute("data-reveal", "in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  const style = { "--reveal-delay": `${delay}ms` } as CSSProperties;
+  const Component = Tag as any;
+  return (
+    <Component ref={ref as any} data-reveal="" style={style} className={className}>
+      {children}
+    </Component>
+  );
+}
 
 const NAV = [
   { label: "Services", href: "#services" },
@@ -123,17 +162,17 @@ function Hero() {
     <section className="mx-auto max-w-7xl px-5 md:px-8 pt-10 md:pt-16 pb-16 md:pb-24">
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 items-start">
         <div>
-          <div className="flex items-center gap-2 text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/70">
+          <div className="hero-rise flex items-center gap-2 text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/70" style={{ ["--rise-delay" as any]: "0ms" }}>
             <Sparkles className="h-4 w-4 text-[#b8935a]" />
             Independent Digital Studio · Est. 2026
           </div>
-          <h1 className="mt-6 font-serif text-[42px] leading-[1.05] sm:text-6xl lg:text-[80px] tracking-tight">
+          <h1 className="hero-rise mt-6 font-serif text-[42px] leading-[1.05] sm:text-6xl lg:text-[80px] tracking-tight" style={{ ["--rise-delay" as any]: "120ms" }}>
             We build calm, <em className="italic font-normal">considered</em> digital products for modern brands.
           </h1>
-          <p className="mt-6 max-w-xl text-[15px] md:text-base text-[#0f2a1d]/70 leading-relaxed">
+          <p className="hero-rise mt-6 max-w-xl text-[15px] md:text-base text-[#0f2a1d]/70 leading-relaxed" style={{ ["--rise-delay" as any]: "320ms" }}>
             Nr Techworks is a small, focused team designing and engineering premium websites, applications and brand systems — end-to-end, without the agency overhead.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="hero-rise mt-8 flex flex-wrap gap-3" style={{ ["--rise-delay" as any]: "460ms" }}>
             <a href="#contact" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-6 py-3 text-sm hover:bg-[#1a3a2a] transition">
               Start a Project <ArrowUpRight className="h-4 w-4" />
             </a>
@@ -142,7 +181,7 @@ function Hero() {
             </a>
           </div>
         </div>
-        <div className="relative">
+        <div className="relative hero-rise overflow-hidden rounded-sm" style={{ ["--rise-delay" as any]: "220ms" }}>
           <video
             src={heroVideoUrl}
             autoPlay
@@ -150,7 +189,7 @@ function Hero() {
             loop
             playsInline
             preload="auto"
-            className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl bg-[#0f2a1d]"
+            className="hero-media w-full aspect-[4/5] object-cover rounded-sm shadow-xl bg-[#0f2a1d]"
           />
           <div className="absolute -bottom-6 left-6 md:-bottom-8 md:-left-8 bg-[#f5f1e8] border border-[#0f2a1d]/10 rounded-md px-5 py-3 shadow-lg">
             <div className="text-[11px] uppercase tracking-widest text-[#0f2a1d]/60">Now Booking</div>
@@ -190,18 +229,18 @@ function SectionHeader({ eyebrow, title }: { eyebrow: string; title: React.React
 function Services() {
   return (
     <section id="services" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
-      <SectionHeader eyebrow="01 · What We Do" title={<>A full studio, <em className="italic font-normal">under one roof.</em></>} />
-      <p className="mt-6 max-w-2xl text-[#0f2a1d]/70">We handle every layer of your digital presence — from the first brand mark to the last line of production code. Two services are our core craft; the rest are natural extensions of them.</p>
+      <Reveal><SectionHeader eyebrow="01 · What We Do" title={<>A full studio, <em className="italic font-normal">under one roof.</em></>} /></Reveal>
+      <Reveal delay={120} as="p" className="mt-6 max-w-2xl text-[#0f2a1d]/70">We handle every layer of your digital presence — from the first brand mark to the last line of production code. Two services are our core craft; the rest are natural extensions of them.</Reveal>
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#0f2a1d]/10 border border-[#0f2a1d]/10">
-        {SERVICES.map((s) => (
-          <div key={s.n} className="bg-[#f5f1e8] p-7 md:p-8 min-h-[220px] flex flex-col">
+        {SERVICES.map((s, i) => (
+          <Reveal key={s.n} delay={(i % 3) * 100} className="card-lift bg-[#f5f1e8] p-7 md:p-8 min-h-[220px] flex flex-col">
             <div className="flex items-center justify-between text-xs">
               {s.tag ? <span className="uppercase tracking-widest text-[#b8935a]">{s.tag}</span> : <span />}
               <span className="text-[#0f2a1d]/40 tabular-nums">{s.n}</span>
             </div>
             <h3 className="mt-6 font-serif text-2xl">{s.title}</h3>
             <p className="mt-3 text-sm text-[#0f2a1d]/70 leading-relaxed">{s.desc}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -212,18 +251,18 @@ function Process() {
   return (
     <section id="process" className="bg-[#0f2a1d] text-[#f5f1e8]">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <div className="text-[13px] uppercase tracking-[0.14em] text-[#f5f1e8]/60">— 02 · How We Work</div>
           <h2 className="mt-4 font-serif text-4xl md:text-6xl leading-[1.05]">A five-step process, <em className="italic font-normal">no surprises.</em></h2>
           <p className="mt-6 text-[#f5f1e8]/70">Every engagement follows the same rigorous, transparent structure. You'll always know what's happening this week, and what's coming next.</p>
-        </div>
+        </Reveal>
         <div className="mt-14 divide-y divide-[#f5f1e8]/15 border-y border-[#f5f1e8]/15">
-          {PROCESS.map((p) => (
-            <div key={p.n} className="grid md:grid-cols-[100px_1fr_2fr] gap-4 md:gap-10 py-8 md:py-10 items-start">
+          {PROCESS.map((p, i) => (
+            <Reveal key={p.n} delay={i * 80} className="grid md:grid-cols-[100px_1fr_2fr] gap-4 md:gap-10 py-8 md:py-10 items-start">
               <div className="text-[#b8935a] font-serif text-xl tabular-nums">{p.n}</div>
               <h3 className="font-serif text-2xl md:text-3xl">{p.title}</h3>
               <p className="text-[#f5f1e8]/70 leading-relaxed">{p.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -234,21 +273,21 @@ function Process() {
 function Why() {
   return (
     <section className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
-      <SectionHeader eyebrow="04 · Why Nr Techworks" title={<>The studio you'd <em className="italic font-normal">actually recommend.</em></>} />
+      <Reveal><SectionHeader eyebrow="04 · Why Nr Techworks" title={<>The studio you'd <em className="italic font-normal">actually recommend.</em></>} /></Reveal>
       <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 border-y border-[#0f2a1d]/15 py-10">
-        {STATS.map((s) => (
-          <div key={s.l}>
+        {STATS.map((s, i) => (
+          <Reveal key={s.l} delay={i * 100}>
             <div className="font-serif text-4xl md:text-5xl">{s.v}</div>
             <div className="mt-2 text-xs md:text-sm text-[#0f2a1d]/70">{s.l}</div>
-          </div>
+          </Reveal>
         ))}
       </div>
       <div className="mt-14 grid md:grid-cols-2 gap-x-14 gap-y-10">
-        {WHY.map((w) => (
-          <div key={w.title}>
+        {WHY.map((w, i) => (
+          <Reveal key={w.title} delay={i * 90}>
             <h3 className="font-serif text-2xl md:text-3xl">{w.title}</h3>
             <p className="mt-3 text-[#0f2a1d]/70 leading-relaxed">{w.desc}</p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -259,10 +298,10 @@ function Testimonials() {
   return (
     <section id="testimonials" className="bg-[#efe9dc]">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
-        <SectionHeader eyebrow="03 · Voices" title={<>Words from <em className="italic font-normal">the people we've built with.</em></>} />
+        <Reveal><SectionHeader eyebrow="03 · Voices" title={<>Words from <em className="italic font-normal">the people we've built with.</em></>} /></Reveal>
         <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <figure key={t.name} className="bg-[#f5f1e8] border border-[#0f2a1d]/10 p-7 flex flex-col">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.name} as="figure" delay={i * 120} className="card-lift bg-[#f5f1e8] border border-[#0f2a1d]/10 p-7 flex flex-col">
               <blockquote className="font-serif text-xl leading-snug flex-1">"{t.quote}"</blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
                 <img src={t.img} alt={t.name} loading="lazy" className="w-12 h-12 rounded-full object-cover" />
@@ -271,7 +310,7 @@ function Testimonials() {
                   <div className="text-xs text-[#0f2a1d]/60">{t.role}</div>
                 </div>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
       </div>
