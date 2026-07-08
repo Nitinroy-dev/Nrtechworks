@@ -269,7 +269,6 @@ function Testimonials() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
       <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
@@ -279,7 +278,7 @@ function Contact() {
         <div className="space-y-8">
           {[
             { l: "Email", v: "nitinroy.hireme@gmail.com", href: "mailto:nitinroy.hireme@gmail.com" },
-            { l: "Phone", v: "+91 98XXX XXXXX", href: "tel:+919800000000" },
+            { l: "Phone", v: "+91 97160 87278", href: "tel:+919716087278" },
             { l: "Studio", v: "Delhi NCR, India" },
           ].map((c) => (
             <div key={c.l} className="border-t border-[#0f2a1d]/15 pt-4">
@@ -295,11 +294,14 @@ function Contact() {
 
         <form
           className="space-y-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
+          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
+          method="POST"
         >
+          {/* FormSubmit config */}
+          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks site" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style={{ display: "none" }} />
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
@@ -330,7 +332,7 @@ function Contact() {
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
             <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
             <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
-              {sent ? "Sent — thank you" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
+              Send Enquiry <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
@@ -370,7 +372,7 @@ function Footer() {
             <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Contact</div>
             <ul className="mt-5 space-y-3 text-[15px] text-[#f5f1e8]/85">
               <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f5f1e8]/60" /><a href="mailto:nitinroy.hireme@gmail.com" className="hover:text-[#b8935a] transition">nitinroy.hireme@gmail.com</a></li>
-              <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919800000000" className="hover:text-[#b8935a] transition">+91 98XXX XXXXX</a></li>
+              <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919716087278" className="hover:text-[#b8935a] transition">+91 97160 87278</a></li>
               <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-[#f5f1e8]/60" />Delhi NCR, India</li>
             </ul>
           </div>
@@ -396,10 +398,7 @@ function Footer() {
 
         <div className="mt-16 pt-6 border-t border-[#f5f1e8]/15 flex flex-wrap items-center justify-between gap-4 text-xs text-[#f5f1e8]/60">
           <div>© {new Date().getFullYear()} Nr Techworks. All rights reserved.</div>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-[#f5f1e8] transition">Admin</a>
-            <span>Crafted with intent.</span>
-          </div>
+          <div>Crafted by Nr Techworks.</div>
         </div>
       </div>
     </footer>
