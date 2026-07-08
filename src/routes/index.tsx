@@ -356,10 +356,51 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
 
 function Footer() {
   return (
-    <footer className="border-t border-[#0f2a1d]/15">
-      <div className="mx-auto max-w-7xl px-5 md:px-8 py-8 flex flex-wrap items-center justify-between gap-4 text-sm text-[#0f2a1d]/70">
-        <div className="font-serif text-lg text-[#0f2a1d]">Nr <span className="italic">Techworks</span><span className="text-[#b8935a]">.</span></div>
-        <div>© {new Date().getFullYear()} Nr Techworks. All rights reserved.</div>
+    <footer className="bg-[#0f2a1d] text-[#f5f1e8]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 pt-20 md:pt-28 pb-8">
+        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr] gap-12 lg:gap-16">
+          <div>
+            <div className="text-xs uppercase tracking-[0.18em] text-[#b8935a]">Nr Techworks</div>
+            <h3 className="mt-5 font-serif text-4xl md:text-6xl leading-[1.05]">
+              Have a project in mind?<br />
+              <a href="#contact" className="italic border-b-2 border-[#b8935a] pb-1">Let's talk.</a>
+            </h3>
+          </div>
+          <div>
+            <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Contact</div>
+            <ul className="mt-5 space-y-3 text-[15px] text-[#f5f1e8]/85">
+              <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f5f1e8]/60" /><a href="mailto:nitinroy.hireme@gmail.com" className="hover:text-[#b8935a] transition">nitinroy.hireme@gmail.com</a></li>
+              <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919800000000" className="hover:text-[#b8935a] transition">+91 98XXX XXXXX</a></li>
+              <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-[#f5f1e8]/60" />Delhi NCR, India</li>
+            </ul>
+          </div>
+          <div>
+            <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Elsewhere</div>
+            <ul className="mt-5 space-y-3 text-[15px]">
+              {[
+                { icon: Instagram, label: "Instagram", href: "#" },
+                { icon: Linkedin, label: "LinkedIn", href: "#" },
+                { icon: Twitter, label: "Twitter / X", href: "#" },
+              ].map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} className="inline-flex items-center gap-3 text-[#f5f1e8]/85 hover:text-[#b8935a] transition">
+                    <s.icon className="h-4 w-4" />
+                    {s.label}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-16 pt-6 border-t border-[#f5f1e8]/15 flex flex-wrap items-center justify-between gap-4 text-xs text-[#f5f1e8]/60">
+          <div>© {new Date().getFullYear()} Nr Techworks. All rights reserved.</div>
+          <div className="flex items-center gap-6">
+            <a href="#" className="hover:text-[#f5f1e8] transition">Admin</a>
+            <span>Crafted with intent.</span>
+          </div>
+        </div>
       </div>
     </footer>
   );
