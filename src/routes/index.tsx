@@ -279,7 +279,7 @@ function Contact() {
         <div className="space-y-8">
           {[
             { l: "Email", v: "nitinroy.hireme@gmail.com", href: "mailto:nitinroy.hireme@gmail.com" },
-            { l: "Phone", v: "+91 98XXX XXXXX", href: "tel:+919800000000" },
+            { l: "Phone", v: "+91 97160 87278", href: "tel:+919716087278" },
             { l: "Studio", v: "Delhi NCR, India" },
           ].map((c) => (
             <div key={c.l} className="border-t border-[#0f2a1d]/15 pt-4">
@@ -295,11 +295,14 @@ function Contact() {
 
         <form
           className="space-y-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
+          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
+          method="POST"
         >
+          {/* FormSubmit config */}
+          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks site" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" style={{ display: "none" }} />
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
@@ -330,7 +333,7 @@ function Contact() {
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
             <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
             <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
-              {sent ? "Sent — thank you" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
+              Send Enquiry <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
