@@ -191,10 +191,6 @@ function Hero() {
             preload="auto"
             className="hero-media w-full aspect-[4/5] object-cover rounded-sm shadow-xl bg-[#0f2a1d]"
           />
-          <div className="absolute -bottom-6 left-6 md:-bottom-8 md:-left-8 bg-[#f5f1e8] border border-[#0f2a1d]/10 rounded-md px-5 py-3 shadow-lg">
-            <div className="text-[11px] uppercase tracking-widest text-[#0f2a1d]/60">Now Booking</div>
-            <div className="font-serif text-lg mt-0.5">Q1 · 2026 Projects</div>
-          </div>
         </div>
       </div>
     </section>
