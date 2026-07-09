@@ -96,9 +96,9 @@ const WHY = [
 ];
 
 const TESTIMONIALS = [
-  { quote: "The clarity Nr Techworks brought to our product roadmap was worth the engagement on day one. Their taste is unmatched.", name: "Ananya Rao", role: "Founder, Studio Ora", img: "https://images.unsplash.com/photo-1573497019236-17f8177b81e8?crop=entropy&cs=srgb&fm=jpg&w=400&q=80" },
-  { quote: "They delivered a dashboard that felt like a product from a Series B startup. Considered, fast, and beautifully engineered.", name: "Rohan Mehta", role: "Head of Ops, Northline", img: "https://images.pexels.com/photos/27086922/pexels-photo-27086922.jpeg?auto=compress&cs=tinysrgb&w=400" },
-  { quote: "From branding to launch, one team. No hand-offs, no gaps. It's the way agencies should have always worked.", name: "Priya Kapoor", role: "Marketing Lead, Halcyon", img: "https://images.pexels.com/photos/37148308/pexels-photo-37148308.jpeg?auto=compress&cs=tinysrgb&w=400" },
+  { quote: "Nr Techworks built our website exactly the way we imagined it — elegant, fast, and true to our brand. Bookings started coming in within the first week of launch.", name: "Krishan Kumar", role: "Founder, Dev&Shiv Event Planners" },
+  { quote: "They understood our small brand's voice and turned it into a website that finally feels premium. The attention to detail is rare.", name: "Meera Sharma", role: "Founder, Kaaya Handlooms" },
+  { quote: "Working with Nr Techworks felt like having an in-house team. Clear communication, quick turnarounds, and a site our customers love.", name: "Arjun Bansal", role: "Co-founder, Tulsi Organics" },
 ];
 
 const MARQUEE = ["Premium Digital Services", "Design + Engineering", "AI-Native Products", "Brand Systems", "SEO & Growth", "Bespoke Applications"];
@@ -299,12 +299,9 @@ function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <Reveal key={t.name} as="figure" delay={i * 120} className="card-lift bg-[#f5f1e8] border border-[#0f2a1d]/10 p-7 flex flex-col">
               <blockquote className="font-serif text-xl leading-snug flex-1">"{t.quote}"</blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <img src={t.img} alt={t.name} loading="lazy" className="w-12 h-12 rounded-full object-cover" />
-                <div>
-                  <div className="text-sm font-medium">{t.name}</div>
-                  <div className="text-xs text-[#0f2a1d]/60">{t.role}</div>
-                </div>
+              <figcaption className="mt-6">
+                <div className="text-sm font-medium">{t.name}</div>
+                <div className="text-xs text-[#0f2a1d]/60">{t.role}</div>
               </figcaption>
             </Reveal>
           ))}
