@@ -484,7 +484,7 @@ function Footer() {
             <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Elsewhere</div>
             <ul className="mt-5 space-y-3 text-[15px]">
               {[
-                { icon: Instagram, label: "Instagram", href: "#" },
+                { icon: Instagram, label: "Instagram", href: "https://instagram.com/nrtechworks" },
                 { icon: Linkedin, label: "LinkedIn", href: "#" },
                 { icon: Twitter, label: "Twitter / X", href: "#" },
               ].map((s) => (
