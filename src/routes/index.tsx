@@ -9,6 +9,10 @@ const thankYouVideoUrl = "/assets/thankyou.mp4";
 const thankYouVideoWebmUrl = "/assets/thankyou.webm";
 const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 
+// Formspree endpoint — replace YOUR_FORM_ID with the hashid shown on your
+// Formspree form's Integration tab (e.g. https://formspree.io/f/mzzvabcd).
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -372,7 +376,7 @@ function Contact() {
     try {
       const payload: Record<string, string> = {};
       data.forEach((v, k) => { payload[k] = String(v); });
-      const res = await fetch("/api/contact", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
