@@ -13,7 +13,7 @@ const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 // keep the thank-you modal instead of a full page redirect. On the very first
 // submission FormSubmit sends an activation email to this address; click the
 // link once and every future submission arrives in the inbox.
-const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/contact@nrtechworks.online";
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/contact@nrtechworks.online";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -368,34 +368,23 @@ function Testimonials() {
 
 function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const submittedRef = useRef(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget;
     const data = new FormData(form);
-    if (String(data.get("_honey") || "")) return;
+    if (String(data.get("_honey") || "")) { e.preventDefault(); return; }
+    submittedRef.current = true;
     setStatus("sending");
-    try {
-      const payload: Record<string, string> = {
-        _subject: "New enquiry from nrtechworks.com",
-        _template: "table",
-        _captcha: "false",
-      };
-      data.forEach((v, k) => { payload[k] = String(v); });
-      const res = await fetch(FORMSUBMIT_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const json = await res.json().catch(() => ({} as { success?: string }));
-      if (!res.ok || (json && json.success && String(json.success).toLowerCase() === "false")) {
-        throw new Error("send failed");
-      }
-      setStatus("success");
-      form.reset();
-    } catch {
-      setStatus("error");
-    }
+    // Let the native POST go to the hidden iframe.
+  };
+
+  const handleIframeLoad = () => {
+    if (!submittedRef.current) return;
+    submittedRef.current = false;
+    setStatus("success");
+    formRef.current?.reset();
   };
 
   const closeModal = () => setStatus("idle");
@@ -423,7 +412,18 @@ function Contact() {
           ))}
         </div>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        <form
+          ref={formRef}
+          className="space-y-5"
+          action={FORMSUBMIT_ENDPOINT}
+          method="POST"
+          target="formsubmit-iframe"
+          onSubmit={handleSubmit}
+        >
+          <input type="hidden" name="_subject" value="New enquiry from nrtechworks.online" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://formsubmit.co/thanks" />
           <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
@@ -468,6 +468,12 @@ function Contact() {
           </div>
         </form>
       </div>
+      <iframe
+        name="formsubmit-iframe"
+        title="formsubmit"
+        onLoad={handleIframeLoad}
+        style={{ display: "none" }}
+      />
       {status === "success" && <ThankYouModal onClose={closeModal} />}
     </section>
   );
