@@ -421,7 +421,6 @@ function Contact() {
           onSubmit={handleSubmit}
         >
           <input type="hidden" name="_subject" value="New enquiry from nrtechworks.online" />
-          <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="https://formsubmit.co/thanks" />
           <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
