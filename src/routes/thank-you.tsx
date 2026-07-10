@@ -13,8 +13,11 @@ export const Route = createFileRoute("/thank-you")({
       { property: "og:title", content: "Thank You — Nr Techworks" },
       { property: "og:description", content: "Your enquiry has been received by Nr Techworks." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/thank-you" },
+      { name: "robots", content: "noindex" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: "/thank-you" }],
   }),
   component: ThankYouPage,
 });

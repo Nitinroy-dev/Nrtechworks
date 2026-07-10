@@ -1,0 +1,13 @@
+# Nr Techworks
+
+> Independent website design & development agency in India building premium websites, web apps, ecommerce stores, and brand systems for startups and growing businesses.
+
+Nr Techworks is a founder-led studio pairing considered design with solid engineering. Services span website design, web app development, ecommerce, brand systems, and SEO.
+
+## Pages
+
+- [Home](/): Overview of services, process, testimonials, and enquiry form.
+
+## Optional
+
+- [Thank You](/thank-you): Post-enquiry confirmation page.

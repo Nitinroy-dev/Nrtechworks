@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Website Design & Development Agency in India | Nr Techworks" },
-      { name: "description", content: "Nr Techworks is an independent website design and development agency in India. We build premium websites, ecommerce stores, web apps and brand systems for startups and businesses worldwide." },
+      { name: "description", content: "Nr Techworks — independent website design & development agency in India building premium websites, ecommerce, web apps and brand systems." },
       { property: "og:title", content: "Website Design & Development Agency in India | Nr Techworks" },
       { property: "og:description", content: "Premium websites, ecommerce and web apps built end-to-end. Hire an independent studio without agency overhead." },
       { property: "og:url", content: "/" },

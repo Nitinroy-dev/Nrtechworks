@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Nr Techworks — Website Design & Development Agency in India" },
-      { name: "description", content: "Nr Techworks is a top website design and development agency in India building premium websites, web apps, ecommerce stores and brand systems for startups and businesses." },
+      { name: "description", content: "Nr Techworks — website design & development agency in India building premium websites, web apps, ecommerce and brand systems." },
       { name: "author", content: "Nr Techworks" },
       { name: "keywords", content: "website design agency, web development agency, website maker, best website design company India, ecommerce website development, web design studio, hire web developer, small business website, startup website design, Nr Techworks" },
       { name: "robots", content: "index, follow, max-image-preview:large" },
