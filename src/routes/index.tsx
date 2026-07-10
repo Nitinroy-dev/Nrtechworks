@@ -443,14 +443,74 @@ function Contact() {
             <textarea name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
           </div>
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
-            <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
-            <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
-              Send Enquiry <ArrowUpRight className="h-4 w-4" />
+            <p className="text-xs text-[#0f2a1d]/60">
+              {status === "error"
+                ? "Couldn't send — please email us directly."
+                : "We reply within 48 hours."}
+            </p>
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition disabled:opacity-60"
+            >
+              {status === "sending" ? "Sending…" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
       </div>
+      {status === "success" && <ThankYouModal onClose={closeModal} />}
     </section>
+  );
+}
+
+function ThankYouModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-[#0f2a1d]/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="relative w-full max-w-xl bg-[#f5f1e8] rounded-2xl overflow-hidden shadow-2xl animate-scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <video
+          autoPlay
+          muted
+          playsInline
+          loop
+          poster={thankYouPosterUrl}
+          className="w-full aspect-square object-cover bg-[#0f2a1d]"
+        >
+          <source src={thankYouVideoWebmUrl} type="video/webm" />
+          <source src={thankYouVideoUrl} type="video/mp4" />
+        </video>
+        <div className="p-6 md:p-8 text-center">
+          <h3 className="font-serif text-2xl md:text-3xl text-[#0f2a1d]">Thank you!</h3>
+          <p className="mt-2 text-[#0f2a1d]/70 text-sm md:text-base">
+            Your enquiry just landed in our inbox. We'll get back to you within 48 hours.
+          </p>
+          <button
+            onClick={onClose}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition"
+          >
+            Back to Homepage <ArrowUpRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
