@@ -8,12 +8,21 @@
    - **Build output directory**: `dist`
    - **Root directory**: (leave empty)
 
-   > If you already created the project and see "Output directory 'dist' not found" / "No build command specified", open **Settings → Builds & deployments → Build configurations → Edit configuration** and set the values above, then retry the deployment.
-4. Environment variables (Settings → Environment variables):
+   This repo also includes the same build command in `wrangler.toml`, so Cloudflare can read it automatically.
+4. Environment variables are already included in `wrangler.toml`:
    - `NITRO_PRESET` = `cloudflare_pages`
    - `NODE_VERSION` = `20`
 5. Save & Deploy.
 6. Custom domain: Pages project → Custom domains → add your domain and follow the CNAME/nameserver instructions.
+
+## If deployment still says "No build command specified"
+
+Cloudflare may cache the Pages build configuration created during the first failed deploy. Fix it once in the dashboard:
+
+1. Pages project → **Settings** → **Builds & deployments** → **Build configurations** → **Edit configuration**.
+2. Set **Build command** to `npm install && npm run build`.
+3. Set **Build output directory** to `dist`.
+4. Save, then go to **Deployments** → **Retry deployment**.
 
 ## Contact form (FormSubmit)
 FormSubmit needs a one-time activation. After the first deploy:
