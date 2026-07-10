@@ -315,33 +315,33 @@ function Contact() {
   const [sending, setSending] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const submittedToFrameRef = useRef(false);
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const submitTimeoutRef = useRef<number | null>(null);
 
-  const completeSubmit = () => {
-    if (!submittedToFrameRef.current) return;
-    if (submitTimeoutRef.current) {
-      window.clearTimeout(submitTimeoutRef.current);
-      submitTimeoutRef.current = null;
-    }
-    formRef.current?.reset();
-    setSending(false);
-    submittedToFrameRef.current = false;
-    setShowThanks(true);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (submitTimeoutRef.current) window.clearTimeout(submitTimeoutRef.current);
-    };
-  }, []);
-
-  const handleSubmit = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError(null);
     setSending(true);
-    submittedToFrameRef.current = true;
-    submitTimeoutRef.current = window.setTimeout(completeSubmit, 1800);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+    formData.forEach((value, key) => {
+      if (typeof value === "string") body.append(key, value);
+    });
+
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error("Netlify form submission failed");
+      form.reset();
+      setShowThanks(true);
+    } catch (err) {
+      setError("Something went wrong. Please email us directly at nitinroy.hireme@gmail.com.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -368,18 +368,17 @@ function Contact() {
         </div>
 
         <form
-          ref={formRef}
+          name="nrtechworks-contact"
           className="space-y-5"
-          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
           method="POST"
-          target="nrtechworks-form-submit"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
         >
-          {/* FormSubmit config */}
-          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks site" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="text" name="_honey" style={{ display: "none" }} />
+          <input type="hidden" name="form-name" value="nrtechworks-contact" />
+          <p className="hidden">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
@@ -414,12 +413,6 @@ function Contact() {
             </button>
           </div>
         </form>
-        <iframe
-          name="nrtechworks-form-submit"
-          title="Nr Techworks form submission"
-          className="hidden"
-          onLoad={completeSubmit}
-        />
       </div>
 
       {showThanks && <ThankYouModal onClose={() => setShowThanks(false)} />}
