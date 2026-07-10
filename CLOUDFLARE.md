@@ -8,8 +8,8 @@
    - **Build output directory**: `dist`
    - **Root directory**: (leave empty)
 
-   This repo also includes the same build command in `wrangler.toml`, so Cloudflare can read it automatically.
-4. Environment variables are already included in `wrangler.toml`:
+   If Cloudflare still skips the build, the repo includes a committed `cloudflare-dist/` fallback and `wrangler.toml` points to it, so the deployment will still have files to upload.
+4. Environment variables (recommended for full framework builds):
    - `NITRO_PRESET` = `cloudflare_pages`
    - `NODE_VERSION` = `20`
 5. Save & Deploy.
@@ -17,11 +17,11 @@
 
 ## If deployment still says "No build command specified"
 
-Cloudflare may cache the Pages build configuration created during the first failed deploy. Fix it once in the dashboard:
+Cloudflare does not read build commands from `wrangler.toml`, and it may cache the Pages build configuration created during the first failed deploy. Fix it once in the dashboard:
 
 1. Pages project → **Settings** → **Builds & deployments** → **Build configurations** → **Edit configuration**.
 2. Set **Build command** to `npm install && npm run build`.
-3. Set **Build output directory** to `dist`.
+3. Set **Build output directory** to `dist` for normal builds, or `cloudflare-dist` if you want to deploy the committed fallback without building.
 4. Save, then go to **Deployments** → **Retry deployment**.
 
 ## Contact form (FormSubmit)
