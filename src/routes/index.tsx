@@ -320,25 +320,21 @@ function Contact() {
     e.preventDefault();
     setError(null);
     setSending(true);
+
     const form = e.currentTarget;
-    const data = new FormData(form);
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+    formData.forEach((value, key) => {
+      if (typeof value === "string") body.append(key, value);
+    });
+
     try {
-      const payload: Record<string, string> = {};
-      data.forEach((value, key) => {
-        payload[key] = typeof value === "string" ? value : "";
-      });
-      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
+      const res = await fetch("/", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
       });
-      const json = await res.json().catch(() => null);
-      if (!res.ok || (json && json.success === "false")) {
-        throw new Error((json && json.message) || "Failed to send");
-      }
+      if (!res.ok) throw new Error("Netlify form submission failed");
       form.reset();
       setShowThanks(true);
     } catch (err) {
@@ -372,14 +368,17 @@ function Contact() {
         </div>
 
         <form
+          name="nrtechworks-contact"
           className="space-y-5"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
         >
-          {/* FormSubmit config */}
-          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks site" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="text" name="_honey" style={{ display: "none" }} />
+          <input type="hidden" name="form-name" value="nrtechworks-contact" />
+          <p className="hidden">
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
