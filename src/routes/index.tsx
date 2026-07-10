@@ -10,6 +10,53 @@ const heroVideoUrl = `${ASSET_ORIGIN}${heroVideo.url}`;
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Website Design & Development Agency in India | Nr Techworks" },
+      { name: "description", content: "Nr Techworks is an independent website design and development agency in India. We build premium websites, ecommerce stores, web apps and brand systems for startups and businesses worldwide." },
+      { property: "og:title", content: "Website Design & Development Agency in India | Nr Techworks" },
+      { property: "og:description", content: "Premium websites, ecommerce and web apps built end-to-end. Hire an independent studio without agency overhead." },
+      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Nr Techworks",
+          url: "/",
+          publisher: { "@type": "Organization", name: "Nr Techworks" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What services does Nr Techworks offer?",
+              acceptedAnswer: { "@type": "Answer", text: "Website design, website development, ecommerce stores, web applications, brand identity and ongoing product engineering." },
+            },
+            {
+              "@type": "Question",
+              name: "Do you build websites for small businesses and startups?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes. Nr Techworks specialises in premium websites and web apps for startups, small businesses and modern brands, delivered end-to-end without agency overhead." },
+            },
+            {
+              "@type": "Question",
+              name: "Where is Nr Techworks based?",
+              acceptedAnswer: { "@type": "Answer", text: "Nr Techworks is an independent studio based in India, working with clients worldwide." },
+            },
+          ],
+        }),
+      },
+    ],
+  }),
 });
 
 // --- Scroll reveal wrapper ---
