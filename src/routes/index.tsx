@@ -368,17 +368,14 @@ function Contact() {
     const form = e.currentTarget;
     const data = new FormData(form);
     if (String(data.get("_honey") || "")) return;
-    const name = String(data.get("name") || "website");
-    // FormSubmit config
-    data.set("_subject", `New enquiry from ${name} — Nr Techworks`);
-    data.set("_template", "table");
-    data.set("_captcha", "false");
     setStatus("sending");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
+      const payload: Record<string, string> = {};
+      data.forEach((v, k) => { payload[k] = String(v); });
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("send failed");
       setStatus("success");
