@@ -315,37 +315,33 @@ function Contact() {
   const [sending, setSending] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [submittedToFrame, setSubmittedToFrame] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const submitTimeoutRef = useRef<number | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const completeSubmit = () => {
+    if (!submittedToFrame) return;
+    if (submitTimeoutRef.current) {
+      window.clearTimeout(submitTimeoutRef.current);
+      submitTimeoutRef.current = null;
+    }
+    formRef.current?.reset();
+    setSending(false);
+    setSubmittedToFrame(false);
+    setShowThanks(true);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current) window.clearTimeout(submitTimeoutRef.current);
+    };
+  }, []);
+
+  const handleSubmit = () => {
     setError(null);
     setSending(true);
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    try {
-      const payload: Record<string, string> = {};
-      data.forEach((value, key) => {
-        payload[key] = typeof value === "string" ? value : "";
-      });
-      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      const json = await res.json().catch(() => null);
-      if (!res.ok || (json && json.success === "false")) {
-        throw new Error((json && json.message) || "Failed to send");
-      }
-      form.reset();
-      setShowThanks(true);
-    } catch (err) {
-      setError("Something went wrong. Please email us directly at nitinroy.hireme@gmail.com.");
-    } finally {
-      setSending(false);
-    }
+    setSubmittedToFrame(true);
+    submitTimeoutRef.current = window.setTimeout(completeSubmit, 1800);
   };
 
   return (
@@ -372,7 +368,11 @@ function Contact() {
         </div>
 
         <form
+          ref={formRef}
           className="space-y-5"
+          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
+          method="POST"
+          target="nrtechworks-form-submit"
           onSubmit={handleSubmit}
         >
           {/* FormSubmit config */}
@@ -414,6 +414,12 @@ function Contact() {
             </button>
           </div>
         </form>
+        <iframe
+          name="nrtechworks-form-submit"
+          title="Nr Techworks form submission"
+          className="hidden"
+          onLoad={completeSubmit}
+        />
       </div>
 
       {showThanks && <ThankYouModal onClose={() => setShowThanks(false)} />}
