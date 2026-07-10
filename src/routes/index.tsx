@@ -315,7 +315,6 @@ function Contact() {
   const [sending, setSending] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [submittedToFrame, setSubmittedToFrame] = useState(false);
   const submittedToFrameRef = useRef(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const submitTimeoutRef = useRef<number | null>(null);
@@ -329,7 +328,6 @@ function Contact() {
     formRef.current?.reset();
     setSending(false);
     submittedToFrameRef.current = false;
-    setSubmittedToFrame(false);
     setShowThanks(true);
   };
 
@@ -343,7 +341,6 @@ function Contact() {
     setError(null);
     setSending(true);
     submittedToFrameRef.current = true;
-    setSubmittedToFrame(true);
     submitTimeoutRef.current = window.setTimeout(completeSubmit, 1800);
   };
 
