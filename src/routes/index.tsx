@@ -1,12 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import heroVideo from "../assets/hero.mp4.asset.json";
 
-// Lovable CDN assets (/__l5e/...) are only served by Lovable's hosting.
-// When deployed elsewhere (e.g. Netlify), prefix with the absolute origin.
-const ASSET_ORIGIN = "https://59429260-2ffa-410a-abf8-f925515c6774.lovableproject.com";
-const heroVideoUrl = `${ASSET_ORIGIN}${heroVideo.url}`;
+const heroVideoUrl = "/assets/hero.mp4";
+const heroVideoWebmUrl = "/assets/hero.webm";
+const heroPosterUrl = "/assets/hero-poster.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -228,14 +226,17 @@ function Hero() {
         </div>
         <div className="relative hero-rise overflow-hidden rounded-sm" style={{ ["--rise-delay" as any]: "220ms" }}>
           <video
-            src={heroVideoUrl}
             autoPlay
             muted
             loop
             playsInline
             preload="auto"
+            poster={heroPosterUrl}
             className="hero-media w-full aspect-[4/5] object-cover rounded-sm shadow-xl bg-[#0f2a1d]"
-          />
+          >
+            <source src={heroVideoWebmUrl} type="video/webm" />
+            <source src={heroVideoUrl} type="video/mp4" />
+          </video>
         </div>
       </div>
     </section>

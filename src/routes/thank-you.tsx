@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
-const ASSET_ORIGIN = "https://59429260-2ffa-410a-abf8-f925515c6774.lovableproject.com";
-const thankyouVideoUrl = `${ASSET_ORIGIN}${thankyouVideo.url}`;
+const thankyouVideoUrl = "/assets/thankyou.mp4";
+const thankyouVideoWebmUrl = "/assets/thankyou.webm";
+const thankyouPosterUrl = "/assets/thankyou-poster.jpg";
 
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
@@ -24,13 +24,17 @@ function ThankYouPage() {
     <main className="min-h-screen bg-[#0f2a1d] text-[#f5f1e8] flex items-center justify-center px-5 py-10">
       <div className="w-full max-w-lg overflow-hidden rounded-2xl bg-[#f5f1e8] text-[#0f2a1d] shadow-2xl">
         <video
-          src={thankyouVideoUrl}
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
+          poster={thankyouPosterUrl}
           className="block w-full bg-black"
-        />
+        >
+          <source src={thankyouVideoWebmUrl} type="video/webm" />
+          <source src={thankyouVideoUrl} type="video/mp4" />
+        </video>
         <div className="p-6 text-center">
           <h1 className="font-serif text-3xl">Thank you!</h1>
           <p className="mt-2 text-sm text-[#0f2a1d]/70">Your enquiry has been received. We'll get back to you within 48 hours.</p>
