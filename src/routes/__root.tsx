@@ -114,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           image: "/og-image.jpg",
           url: "/",
           telephone: "+91-97160-87278",
-          email: "nitinroy.hireme@gmail.com",
+          email: "contact@nrtechworks.online",
           address: { "@type": "PostalAddress", addressCountry: "IN" },
           areaServed: "Worldwide",
           priceRange: "$$",

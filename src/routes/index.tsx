@@ -13,7 +13,7 @@ const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 // keep the thank-you modal instead of a full page redirect. On the very first
 // submission FormSubmit sends an activation email to this address; click the
 // link once and every future submission arrives in the inbox.
-const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/nitinroy.hireme@gmail.com";
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/contact@nrtechworks.online";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -408,7 +408,7 @@ function Contact() {
       <div className="mt-14 grid lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16">
         <div className="space-y-8">
           {[
-            { l: "Email", v: "nitinroy.hireme@gmail.com", href: "mailto:nitinroy.hireme@gmail.com" },
+            { l: "Email", v: "contact@nrtechworks.online", href: "mailto:contact@nrtechworks.online" },
             { l: "Phone", v: "+91 97160 87278", href: "tel:+919716087278" },
             { l: "Studio", v: "Delhi NCR, India" },
           ].map((c) => (
@@ -554,7 +554,7 @@ function Footer() {
           <div>
             <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Contact</div>
             <ul className="mt-5 space-y-3 text-[15px] text-[#f5f1e8]/85">
-              <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f5f1e8]/60" /><a href="mailto:nitinroy.hireme@gmail.com" className="hover:text-[#b8935a] transition">nitinroy.hireme@gmail.com</a></li>
+              <li className="flex items-center gap-3"><Mail className="h-4 w-4 text-[#f5f1e8]/60" /><a href="mailto:contact@nrtechworks.online" className="hover:text-[#b8935a] transition">contact@nrtechworks.online</a></li>
               <li className="flex items-center gap-3"><Phone className="h-4 w-4 text-[#f5f1e8]/60" /><a href="tel:+919716087278" className="hover:text-[#b8935a] transition">+91 97160 87278</a></li>
               <li className="flex items-center gap-3"><MapPin className="h-4 w-4 text-[#f5f1e8]/60" />Delhi NCR, India</li>
             </ul>
