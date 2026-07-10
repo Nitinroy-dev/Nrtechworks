@@ -205,14 +205,17 @@
 @keyframes gold-pulse {
   0%, 100% {
     text-shadow: 0 0 6px rgba(184, 147, 90, 0.45), 0 0 16px rgba(184, 147, 90, 0.25);
+    filter: drop-shadow(0 0 4px rgba(184, 147, 90, 0.55)) drop-shadow(0 0 10px rgba(184, 147, 90, 0.35));
   }
   50% {
     text-shadow: 0 0 10px rgba(184, 147, 90, 0.6), 0 0 24px rgba(184, 147, 90, 0.35);
+    filter: drop-shadow(0 0 7px rgba(184, 147, 90, 0.75)) drop-shadow(0 0 16px rgba(184, 147, 90, 0.5));
   }
 }
 .text-gold-glow {
   color: #b8935a;
   text-shadow: 0 0 6px rgba(184, 147, 90, 0.45), 0 0 16px rgba(184, 147, 90, 0.25);
+  filter: drop-shadow(0 0 4px rgba(184, 147, 90, 0.55)) drop-shadow(0 0 10px rgba(184, 147, 90, 0.35));
   animation: gold-pulse 3s ease-in-out infinite;
 }
 
