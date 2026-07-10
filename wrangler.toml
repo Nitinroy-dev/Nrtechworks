@@ -1,11 +1,4 @@
 name = "nrtechworks"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "dist"
-
-[build]
-command = "npm install && npm run build"
-
-[vars]
-NITRO_PRESET = "cloudflare_pages"
-NODE_VERSION = "20"
+pages_build_output_dir = "cloudflare-dist"
