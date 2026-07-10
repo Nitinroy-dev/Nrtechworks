@@ -5,6 +5,9 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 const heroVideoUrl = "/assets/hero.mp4";
 const heroVideoWebmUrl = "/assets/hero.webm";
 const heroPosterUrl = "/assets/hero-poster.jpg";
+const thankYouVideoUrl = "/assets/thankyou.mp4";
+const thankYouVideoWebmUrl = "/assets/thankyou.webm";
+const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -358,32 +361,34 @@ function Testimonials() {
 }
 
 function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const honey = String(data.get("_honey") || "");
-    if (honey) return; // spam bot
-    const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const phone = String(data.get("phone") || "");
-    const service = String(data.get("service") || "");
-    const budget = String(data.get("budget") || "");
-    const message = String(data.get("message") || "");
-    const body =
-      `Name: ${name}\n` +
-      `Email: ${email}\n` +
-      `Phone: ${phone}\n` +
-      `Service: ${service}\n` +
-      `Budget: ${budget}\n\n` +
-      `Project Details:\n${message}\n`;
-    const subject = `New enquiry from ${name || "website"}`;
-    const mailto = `mailto:nitinroy.hireme@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setTimeout(() => {
-      window.location.href = "/thank-you";
-    }, 500);
+    if (String(data.get("_honey") || "")) return;
+    const name = String(data.get("name") || "website");
+    // FormSubmit config
+    data.set("_subject", `New enquiry from ${name} — Nr Techworks`);
+    data.set("_template", "table");
+    data.set("_captcha", "false");
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      if (!res.ok) throw new Error("send failed");
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const closeModal = () => setStatus("idle");
 
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
@@ -438,14 +443,74 @@ function Contact() {
             <textarea name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
           </div>
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
-            <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
-            <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
-              Send Enquiry <ArrowUpRight className="h-4 w-4" />
+            <p className="text-xs text-[#0f2a1d]/60">
+              {status === "error"
+                ? "Couldn't send — please email us directly."
+                : "We reply within 48 hours."}
+            </p>
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition disabled:opacity-60"
+            >
+              {status === "sending" ? "Sending…" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
       </div>
+      {status === "success" && <ThankYouModal onClose={closeModal} />}
     </section>
+  );
+}
+
+function ThankYouModal({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] bg-[#0f2a1d]/80 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="relative w-full max-w-xl bg-[#f5f1e8] rounded-2xl overflow-hidden shadow-2xl animate-scale-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <video
+          autoPlay
+          muted
+          playsInline
+          loop
+          poster={thankYouPosterUrl}
+          className="w-full aspect-square object-cover bg-[#0f2a1d]"
+        >
+          <source src={thankYouVideoWebmUrl} type="video/webm" />
+          <source src={thankYouVideoUrl} type="video/mp4" />
+        </video>
+        <div className="p-6 md:p-8 text-center">
+          <h3 className="font-serif text-2xl md:text-3xl text-[#0f2a1d]">Thank you!</h3>
+          <p className="mt-2 text-[#0f2a1d]/70 text-sm md:text-base">
+            Your enquiry just landed in our inbox. We'll get back to you within 48 hours.
+          </p>
+          <button
+            onClick={onClose}
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition"
+          >
+            Back to Homepage <ArrowUpRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
