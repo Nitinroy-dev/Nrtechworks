@@ -227,7 +227,7 @@ function Hero() {
             </a>
           </div>
         </div>
-        <div className="relative hero-rise overflow-hidden rounded-sm self-stretch h-full" style={{ ["--rise-delay" as any]: "220ms" }}>
+        <div className="relative hero-rise overflow-hidden rounded-sm mx-auto w-full max-w-md lg:max-w-none" style={{ ["--rise-delay" as any]: "220ms" }}>
           <video
             autoPlay
             muted
@@ -235,7 +235,7 @@ function Hero() {
             playsInline
             preload="auto"
             poster={heroPosterUrl}
-            className="hero-media w-full h-full max-h-full object-cover rounded-sm shadow-xl bg-[#0f2a1d] aspect-[4/5] lg:aspect-auto"
+            className="hero-media w-full object-cover rounded-sm shadow-xl bg-[#0f2a1d] aspect-[4/5]"
           >
             <source src={heroVideoWebmUrl} type="video/webm" />
             <source src={heroVideoUrl} type="video/mp4" />
