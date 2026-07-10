@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Website Design & Development Agency in India | Nr Techworks" },
-      { name: "description", content: "Nr Techworks is an independent website design and development agency in India. We build premium websites, ecommerce stores, web apps and brand systems for startups and businesses worldwide." },
+      { name: "description", content: "Nr Techworks — independent website design & development agency in India building premium websites, ecommerce, web apps and brand systems." },
       { property: "og:title", content: "Website Design & Development Agency in India | Nr Techworks" },
       { property: "og:description", content: "Premium websites, ecommerce and web apps built end-to-end. Hire an independent studio without agency overhead." },
       { property: "og:url", content: "/" },
@@ -431,15 +431,15 @@ function Contact() {
           </div>
           <Field label="Phone (optional)" name="phone" />
           <div>
-            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Service Interested</label>
-            <select name="service" required className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+            <label htmlFor="service" className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Service Interested</label>
+            <select id="service" name="service" required className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
               <option value="">Select…</option>
               {SERVICES.map((s) => <option key={s.title}>{s.title}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Budget Range</label>
-            <select name="budget" className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
+            <label htmlFor="budget" className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Budget Range</label>
+            <select id="budget" name="budget" className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d]">
               <option value="">Select…</option>
               <option>Under ₹50,000</option>
               <option>₹50,000 – ₹1,50,000</option>
@@ -449,8 +449,8 @@ function Contact() {
             </select>
           </div>
           <div>
-            <label className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Project Details</label>
-            <textarea name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
+            <label htmlFor="message" className="text-xs uppercase tracking-widest text-[#0f2a1d]/60">Project Details</label>
+            <textarea id="message" name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
           </div>
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
             <p className="text-xs text-[#0f2a1d]/60">
