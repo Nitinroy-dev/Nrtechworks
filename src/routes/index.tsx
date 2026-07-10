@@ -2,13 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import heroVideo from "../assets/hero.mp4.asset.json";
-import thankyouVideo from "../assets/thankyou.mp4.asset.json";
 
 // Lovable CDN assets (/__l5e/...) are only served by Lovable's hosting.
 // When deployed elsewhere (e.g. Netlify), prefix with the absolute origin.
 const ASSET_ORIGIN = "https://59429260-2ffa-410a-abf8-f925515c6774.lovableproject.com";
 const heroVideoUrl = `${ASSET_ORIGIN}${heroVideo.url}`;
-const thankyouVideoUrl = `${ASSET_ORIGIN}${thankyouVideo.url}`;
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -312,38 +310,6 @@ function Testimonials() {
 }
 
 function Contact() {
-  const [sending, setSending] = useState(false);
-  const [showThanks, setShowThanks] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    setSending(true);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const body = new URLSearchParams();
-    formData.forEach((value, key) => {
-      if (typeof value === "string") body.append(key, value);
-    });
-
-    try {
-      const res = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
-      if (!res.ok) throw new Error("Netlify form submission failed");
-      form.reset();
-      setShowThanks(true);
-    } catch (err) {
-      setError("Something went wrong. Please email us directly at nitinroy.hireme@gmail.com.");
-    } finally {
-      setSending(false);
-    }
-  };
-
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
       <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
@@ -371,9 +337,9 @@ function Contact() {
           name="nrtechworks-contact"
           className="space-y-5"
           method="POST"
+          action="/thank-you"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="nrtechworks-contact" />
           <p className="hidden">
@@ -407,50 +373,14 @@ function Contact() {
             <textarea name="message" rows={4} className="mt-2 w-full bg-transparent border-b border-[#0f2a1d]/30 py-3 text-[#0f2a1d] focus:outline-none focus:border-[#0f2a1d] resize-none" />
           </div>
           <div className="flex items-center justify-between pt-4 gap-4 flex-wrap">
-            <p className="text-xs text-[#0f2a1d]/60">{error ? <span className="text-red-600">{error}</span> : "We reply within 48 hours."}</p>
-            <button type="submit" disabled={sending} className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition disabled:opacity-60">
-              {sending ? "Sending…" : "Send Enquiry"} <ArrowUpRight className="h-4 w-4" />
+            <p className="text-xs text-[#0f2a1d]/60">We reply within 48 hours.</p>
+            <button type="submit" className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition">
+              Send Enquiry <ArrowUpRight className="h-4 w-4" />
             </button>
           </div>
         </form>
       </div>
-
-      {showThanks && <ThankYouModal onClose={() => setShowThanks(false)} />}
     </section>
-  );
-}
-
-function ThankYouModal({ onClose }: { onClose: () => void }) {
-  const goHome = () => {
-    onClose();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-  return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onClick={goHome}>
-      <div
-        className="relative w-full max-w-lg bg-[#f5f1e8] rounded-2xl overflow-hidden shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <video
-          src={thankyouVideoUrl}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-auto block bg-black"
-        />
-        <div className="p-6 text-center">
-          <div className="font-serif text-2xl text-[#0f2a1d]">Thank you!</div>
-          <p className="mt-2 text-sm text-[#0f2a1d]/70">Your enquiry has been received. We'll get back to you within 48 hours.</p>
-          <button
-            onClick={goHome}
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition"
-          >
-            Back to Homepage
-          </button>
-        </div>
-      </div>
-    </div>
   );
 }
 
