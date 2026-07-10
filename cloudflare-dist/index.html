@@ -93,6 +93,15 @@
       .reveal.in.card:hover { transform: translateY(-4px); }
       .hero .media-shell { min-height: 100%; } @media (max-width: 850px) { .hero video { aspect-ratio: 4 / 5; } .nav { height: 68px; } nav, header .button { display: none; } .hero, .contact-grid, .footer-grid, .process-row { grid-template-columns: 1fr; } .service-grid, .test-grid, .why-grid { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } section { padding: 76px 0; } .two { grid-template-columns: 1fr; } }
       @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } .rise, .reveal { opacity: 1; transform: none; } }
+      .modal-overlay { position: fixed; inset: 0; background: rgba(15,42,29,.8); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100; }
+      .modal-overlay.open { display: flex; animation: fadeIn .25s ease; }
+      .modal-card { position: relative; width: 100%; max-width: 560px; background: var(--cream); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.4); animation: popIn .3s cubic-bezier(.22,1,.36,1); }
+      .modal-card video { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: var(--ink); display: block; }
+      .modal-body { padding: 28px 24px; text-align: center; }
+      .modal-body h3 { margin: 0; font: 30px "Playfair Display", Georgia, serif; }
+      .modal-body p { margin: 10px 0 22px; color: rgba(15,42,29,.7); font-size: 15px; }
+      @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+      @keyframes popIn { from { opacity: 0; transform: scale(.94) } to { opacity: 1; transform: scale(1) } }
     </style>
   </head>
   <body>
