@@ -45,8 +45,8 @@
       .track { display: flex; gap: 40px; width: max-content; animation: marquee 25s linear infinite; font: 30px "Playfair Display", Georgia, serif; white-space: nowrap; }
       .track span { display: inline-flex; align-items: center; gap: 40px; }
       .star, .gold { color: var(--gold); }
-      .gold-glow { color: var(--gold); text-shadow: 0 0 6px rgba(184,147,90,.45), 0 0 16px rgba(184,147,90,.25); animation: goldPulse 3s ease-in-out infinite; }
-      @keyframes goldPulse { 0%,100% { text-shadow: 0 0 6px rgba(184,147,90,.45), 0 0 16px rgba(184,147,90,.25); } 50% { text-shadow: 0 0 10px rgba(184,147,90,.6), 0 0 24px rgba(184,147,90,.35); } }
+      .gold-glow { color: var(--gold); text-shadow: 0 0 6px rgba(184,147,90,.45), 0 0 16px rgba(184,147,90,.25); filter: drop-shadow(0 0 4px rgba(184,147,90,.55)) drop-shadow(0 0 10px rgba(184,147,90,.35)); animation: goldPulse 3s ease-in-out infinite; display: inline-block; }
+      @keyframes goldPulse { 0%,100% { text-shadow: 0 0 6px rgba(184,147,90,.45), 0 0 16px rgba(184,147,90,.25); filter: drop-shadow(0 0 4px rgba(184,147,90,.55)) drop-shadow(0 0 10px rgba(184,147,90,.35)); } 50% { text-shadow: 0 0 10px rgba(184,147,90,.6), 0 0 24px rgba(184,147,90,.35); filter: drop-shadow(0 0 7px rgba(184,147,90,.75)) drop-shadow(0 0 16px rgba(184,147,90,.5)); } }
       @keyframes marquee { to { transform: translateX(-50%); } }
       section { padding: 96px 0; }
       .section-title { max-width: 780px; }
