@@ -357,6 +357,12 @@ function Testimonials() {
 }
 
 function Contact() {
+  const [thankYouUrl, setThankYouUrl] = useState("/thank-you");
+
+  useEffect(() => {
+    setThankYouUrl(`${window.location.origin}/thank-you`);
+  }, []);
+
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
       <SectionHeader eyebrow="05 · Let's Build" title={<>Tell us about <em className="italic font-normal">your project.</em></>} />
@@ -381,17 +387,15 @@ function Contact() {
         </div>
 
         <form
-          name="nrtechworks-contact"
           className="space-y-5"
           method="POST"
-          action="/thank-you"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
+          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
         >
-          <input type="hidden" name="form-name" value="nrtechworks-contact" />
-          <p className="hidden">
-            <label>Don't fill this out: <input name="bot-field" /></label>
-          </p>
+          <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
+          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks website" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value={thankYouUrl} />
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
