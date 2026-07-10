@@ -372,7 +372,7 @@ function Contact() {
     try {
       const payload: Record<string, string> = {};
       data.forEach((v, k) => { payload[k] = String(v); });
-      const res = await fetch("/api/contact", {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
