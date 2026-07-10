@@ -4,8 +4,11 @@
 2. Cloudflare Dashboard → Workers & Pages → Create → Pages → Connect to Git → pick this repo.
 3. Build settings:
    - **Framework preset**: None
-   - **Build command**: `npm run build`
+   - **Build command**: `npm install && npm run build`
    - **Build output directory**: `dist`
+   - **Root directory**: (leave empty)
+
+   > If you already created the project and see "Output directory 'dist' not found" / "No build command specified", open **Settings → Builds & deployments → Build configurations → Edit configuration** and set the values above, then retry the deployment.
 4. Environment variables (Settings → Environment variables):
    - `NITRO_PRESET` = `cloudflare_pages`
    - `NODE_VERSION` = `20`
