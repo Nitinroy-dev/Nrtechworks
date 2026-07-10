@@ -206,7 +206,7 @@ function Header() {
 function Hero() {
   return (
     <section className="mx-auto max-w-7xl px-5 md:px-8 pt-10 md:pt-16 pb-16 md:pb-24">
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 items-center">
+      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 lg:items-stretch items-center">
         <div>
           <div className="hero-rise flex items-center gap-2 text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/70" style={{ ["--rise-delay" as any]: "0ms" }}>
             <Sparkles className="h-4 w-4 text-[#b8935a]" />
