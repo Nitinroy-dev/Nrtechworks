@@ -201,6 +201,12 @@
 }
 .hero-media { animation: slow-zoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
+/* Golden glow for hero badge word */
+.text-gold-glow {
+  color: #b8935a;
+  text-shadow: 0 0 6px rgba(184, 147, 90, 0.45), 0 0 16px rgba(184, 147, 90, 0.25);
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal], .hero-rise, .hero-media, .card-lift { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
 }
