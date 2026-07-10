@@ -357,11 +357,32 @@ function Testimonials() {
 }
 
 function Contact() {
-  const [thankYouUrl, setThankYouUrl] = useState("/thank-you");
-
-  useEffect(() => {
-    setThankYouUrl(`${window.location.origin}/thank-you`);
-  }, []);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const honey = String(data.get("_honey") || "");
+    if (honey) return; // spam bot
+    const name = String(data.get("name") || "");
+    const email = String(data.get("email") || "");
+    const phone = String(data.get("phone") || "");
+    const service = String(data.get("service") || "");
+    const budget = String(data.get("budget") || "");
+    const message = String(data.get("message") || "");
+    const body =
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Phone: ${phone}\n` +
+      `Service: ${service}\n` +
+      `Budget: ${budget}\n\n` +
+      `Project Details:\n${message}\n`;
+    const subject = `New enquiry from ${name || "website"}`;
+    const mailto = `mailto:nitinroy.hireme@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+    setTimeout(() => {
+      window.location.href = "/thank-you";
+    }, 500);
+  };
 
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
@@ -386,16 +407,8 @@ function Contact() {
           ))}
         </div>
 
-        <form
-          className="space-y-5"
-          method="POST"
-          action="https://formsubmit.co/nitinroy.hireme@gmail.com"
-        >
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <input type="text" name="_honey" className="hidden" tabIndex={-1} autoComplete="off" />
-          <input type="hidden" name="_subject" value="New enquiry from Nr Techworks website" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value={thankYouUrl} />
           <div className="grid sm:grid-cols-2 gap-5">
             <Field label="Full Name" name="name" required />
             <Field label="Email" name="email" type="email" required />
