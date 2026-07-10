@@ -215,7 +215,7 @@ function Hero() {
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-14 lg:items-stretch items-center">
         <div>
           <div className="hero-rise flex items-center gap-2 text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/70" style={{ ["--rise-delay" as any]: "0ms" }}>
-            <Sparkles className="h-4 w-4 text-[#b8935a]" />
+            <Sparkles className="h-4 w-4 text-gold-glow" />
             <span className="text-gold-glow">Independent</span> Digital Studio · Est. 2026
           </div>
           <h1 className="hero-rise mt-6 font-serif text-[42px] leading-[1.05] sm:text-6xl lg:text-[80px] tracking-tight" style={{ ["--rise-delay" as any]: "120ms" }}>
