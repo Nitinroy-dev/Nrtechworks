@@ -9,9 +9,11 @@ const thankYouVideoUrl = "/assets/thankyou.mp4";
 const thankYouVideoWebmUrl = "/assets/thankyou.webm";
 const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 
-// Formspree endpoint — replace YOUR_FORM_ID with the hashid shown on your
-// Formspree form's Integration tab (e.g. https://formspree.io/f/mzzvabcd).
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+// FormSubmit AJAX endpoint — sends form data as JSON, returns JSON so we can
+// keep the thank-you modal instead of a full page redirect. On the very first
+// submission FormSubmit sends an activation email to this address; click the
+// link once and every future submission arrives in the inbox.
+const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/nitinroy.hireme@gmail.com";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -374,14 +376,21 @@ function Contact() {
     if (String(data.get("_honey") || "")) return;
     setStatus("sending");
     try {
-      const payload: Record<string, string> = {};
+      const payload: Record<string, string> = {
+        _subject: "New enquiry from nrtechworks.com",
+        _template: "table",
+        _captcha: "false",
+      };
       data.forEach((v, k) => { payload[k] = String(v); });
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("send failed");
+      const json = await res.json().catch(() => ({} as { success?: string }));
+      if (!res.ok || (json && json.success && String(json.success).toLowerCase() === "false")) {
+        throw new Error("send failed");
+      }
       setStatus("success");
       form.reset();
     } catch {
