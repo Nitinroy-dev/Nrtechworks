@@ -361,32 +361,34 @@ function Testimonials() {
 }
 
 function Contact() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const honey = String(data.get("_honey") || "");
-    if (honey) return; // spam bot
-    const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const phone = String(data.get("phone") || "");
-    const service = String(data.get("service") || "");
-    const budget = String(data.get("budget") || "");
-    const message = String(data.get("message") || "");
-    const body =
-      `Name: ${name}\n` +
-      `Email: ${email}\n` +
-      `Phone: ${phone}\n` +
-      `Service: ${service}\n` +
-      `Budget: ${budget}\n\n` +
-      `Project Details:\n${message}\n`;
-    const subject = `New enquiry from ${name || "website"}`;
-    const mailto = `mailto:nitinroy.hireme@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setTimeout(() => {
-      window.location.href = "/thank-you";
-    }, 500);
+    if (String(data.get("_honey") || "")) return;
+    const name = String(data.get("name") || "website");
+    // FormSubmit config
+    data.set("_subject", `New enquiry from ${name} — Nr Techworks`);
+    data.set("_template", "table");
+    data.set("_captcha", "false");
+    setStatus("sending");
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      if (!res.ok) throw new Error("send failed");
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   };
+
+  const closeModal = () => setStatus("idle");
 
   return (
     <section id="contact" className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
