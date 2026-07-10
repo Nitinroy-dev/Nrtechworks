@@ -323,16 +323,26 @@ function Contact() {
     const form = e.currentTarget;
     const data = new FormData(form);
     try {
+      const payload: Record<string, string> = {};
+      data.forEach((value, key) => {
+        payload[key] = typeof value === "string" ? value : "";
+      });
       const res = await fetch("https://formsubmit.co/ajax/nitinroy.hireme@gmail.com", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Failed to send");
+      const json = await res.json().catch(() => null);
+      if (!res.ok || (json && json.success === "false")) {
+        throw new Error((json && json.message) || "Failed to send");
+      }
       form.reset();
       setShowThanks(true);
     } catch (err) {
-      setError("Something went wrong. Please try again or email us directly.");
+      setError("Something went wrong. Please email us directly at nitinroy.hireme@gmail.com.");
     } finally {
       setSending(false);
     }
