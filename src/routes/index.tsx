@@ -9,6 +9,10 @@ const thankYouVideoUrl = "/assets/thankyou.mp4";
 const thankYouVideoWebmUrl = "/assets/thankyou.webm";
 const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 
+// Formspree endpoint — replace YOUR_FORM_ID with the hashid shown on your
+// Formspree form's Integration tab (e.g. https://formspree.io/f/mzzvabcd).
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
