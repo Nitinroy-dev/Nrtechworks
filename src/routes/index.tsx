@@ -5,6 +5,9 @@ import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 
 const heroVideoUrl = "/assets/hero.mp4";
 const heroVideoWebmUrl = "/assets/hero.webm";
 const heroPosterUrl = "/assets/hero-poster.jpg";
+const thankYouVideoUrl = "/assets/thankyou.mp4";
+const thankYouVideoWebmUrl = "/assets/thankyou.webm";
+const thankYouPosterUrl = "/assets/thankyou-poster.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
