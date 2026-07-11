@@ -104,6 +104,10 @@
       .modal-body p { margin: 10px 0 22px; color: rgba(15,42,29,.7); font-size: 15px; }
       @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
       @keyframes popIn { from { opacity: 0; transform: scale(.94) } to { opacity: 1; transform: scale(1) } }
+      .d-120 { --d: 120ms; } .d-220 { --d: 220ms; } .d-320 { --d: 320ms; } .d-460 { --d: 460ms; }
+      .hidden-el { display: none; }
+      .wa-fab { position: fixed; bottom: 20px; right: 20px; z-index: 9999; width: 56px; height: 56px; border-radius: 9999px; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,.2); transition: transform .2s ease; }
+      .wa-fab:hover { transform: scale(1.1); }
     </style>
   </head>
   <body>
