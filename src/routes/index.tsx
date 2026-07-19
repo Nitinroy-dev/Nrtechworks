@@ -369,14 +369,17 @@ function FeaturedProjects() {
               href="https://devandshiveventplanners.online/"
               target="_blank"
               rel="noopener noreferrer"
-              className="block card-lift overflow-hidden border border-[#0f2a1d]/10 bg-[#efe9dc]"
+              className="block card-lift border border-[#0f2a1d]/10 bg-[#0f2a1d] shadow-[0_30px_60px_-30px_rgba(15,42,29,0.45)]"
             >
-              <img
-                src="/dev-and-shiv.jpg"
-                alt="Dev & Shiv Event Planners — luxury event planning website designed and built by Nr Techworks"
-                loading="lazy"
-                className="w-full h-auto block"
-              />
+              <div className="work-chrome"><span /><span /><span /></div>
+              <div className="work-frame">
+                <img
+                  src="/dev-and-shiv.jpg"
+                  alt="Dev & Shiv Event Planners — luxury event planning website designed and built by Nr Techworks"
+                  loading="lazy"
+                  className="w-full h-auto block"
+                />
+              </div>
             </a>
           </Reveal>
           <Reveal delay={120}>
