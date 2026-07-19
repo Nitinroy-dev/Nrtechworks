@@ -20,4 +20,4 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-site
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-v6JU2pF75P2ArFcWcz8pEzjIPBuNnuOI9tUCL65eIdo='; style-src 'self' 'sha256-Rk57X97r3tDCQNoxOIJMdhPhmWlQLwt+fwoG7+QBzZo=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-v6JU2pF75P2ArFcWcz8pEzjIPBuNnuOI9tUCL65eIdo='; style-src 'self' 'sha256-NC2ZieW87fs8pRbvF46UlzeChPr3RDr0EgEzm7tS2Ko=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://formsubmit.co; form-action 'self' https://formsubmit.co; frame-src https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
