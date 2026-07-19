@@ -164,6 +164,7 @@ function Index() {
       <Marquee />
       <Services />
       <Process />
+      <OurWorkPreview />
       <Why />
       <Testimonials />
       <Contact />
