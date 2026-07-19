@@ -61,18 +61,21 @@ const DEMOS = [
     title: "Dental Solution",
     category: "Healthcare · Clinic",
     url: "https://demo-dental-solution.vercel.app/",
+    image: "/demos/dental.jpg",
     desc: "A calm, trust-first website template for modern dental clinics — appointment booking, services, and doctor profiles.",
   },
   {
     title: "Tattoo Artist Studio",
     category: "Creative · Studio",
     url: "https://Tatoo-artist-demo.vercel.app",
+    image: "/demos/tattoo.jpg",
     desc: "An editorial, image-led template for tattoo artists and studios — portfolio galleries, artists, and enquiry flow.",
   },
   {
-    title: "Ironforge Gym",
+    title: "GYM Website",
     category: "Fitness · Gym",
     url: "https://ironforge-gym-demo.vercel.app/",
+    image: "/demos/gym.jpg",
     desc: "A bold, high-energy template for gyms and fitness studios — class schedules, memberships, and trainer profiles.",
   },
 ];
@@ -189,13 +192,13 @@ function DemoProjects() {
                 className="group block card-lift border border-[#0f2a1d]/10 bg-[#f5f1e8] rounded-sm overflow-hidden h-full flex flex-col"
               >
                 <div className="work-chrome"><span /><span /><span /></div>
-                <div className="aspect-[16/10] bg-gradient-to-br from-[#0f2a1d] to-[#1a3a2a] relative overflow-hidden flex items-center justify-center p-6">
-                  <div className="text-center">
-                    <div className="font-serif text-2xl md:text-3xl text-[#f5f1e8]">{d.title}</div>
-                    <div className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[#b8935a] break-all">
-                      {d.url.replace(/^https?:\/\//, "")}
-                    </div>
-                  </div>
+                <div className="work-frame aspect-[16/10] bg-[#0f2a1d] relative overflow-hidden">
+                  <img
+                    src={d.image}
+                    alt={`${d.title} — website template preview by Nr Techworks`}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="text-[11px] uppercase tracking-[0.14em] text-[#b8935a]">{d.category}</div>
