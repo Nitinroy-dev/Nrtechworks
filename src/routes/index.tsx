@@ -570,11 +570,11 @@ function Contact() {
               )}
             </div>
           ))}
-          <div className="border-t border-[#0f2a1d]/15 pt-4" data-reveal style={{ ["--reveal-delay" as any]: "200ms" }}>
+          <div className="border-t border-[#0f2a1d]/15 pt-4">
             <div className="text-xs uppercase tracking-widest text-[#0f2a1d]/50">Recognition</div>
             <div className="mt-2 flex items-center gap-3">
-              <span className="udyam-badge inline-flex items-center gap-2 rounded-full border border-[#b8935a]/40 bg-[#b8935a]/10 px-3 py-1.5 text-xs font-medium tracking-wide text-[#0f2a1d] transition-all duration-500 hover:bg-[#b8935a]/20 hover:border-[#b8935a]/70 hover:-translate-y-0.5">
-                <span className="udyam-dot h-1.5 w-1.5 rounded-full bg-[#b8935a]" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#b8935a]/40 bg-[#b8935a]/10 px-3 py-1.5 text-xs font-medium tracking-wide text-[#0f2a1d]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#b8935a]" />
                 Udyam MSME Registered
               </span>
             </div>
