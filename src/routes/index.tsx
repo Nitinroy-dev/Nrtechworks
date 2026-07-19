@@ -570,6 +570,16 @@ function Contact() {
               )}
             </div>
           ))}
+          <div className="border-t border-[#0f2a1d]/15 pt-4">
+            <div className="text-xs uppercase tracking-widest text-[#0f2a1d]/50">Recognition</div>
+            <div className="mt-2 flex items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#b8935a]/40 bg-[#b8935a]/10 px-3 py-1.5 text-xs font-medium tracking-wide text-[#0f2a1d]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#b8935a]" />
+                Udyam MSME Registered
+              </span>
+            </div>
+            <p className="mt-2 text-xs text-[#0f2a1d]/50">Govt. of India · Ministry of MSME</p>
+          </div>
         </div>
 
         <form
