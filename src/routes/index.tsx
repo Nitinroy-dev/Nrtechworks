@@ -620,7 +620,7 @@ export function Footer() {
             <div className="text-xs uppercase tracking-[0.18em] text-[#b8935a]">Nr Techworks</div>
             <h3 className="mt-5 font-serif text-4xl md:text-6xl leading-[1.05]">
               Have a project in mind?<br />
-              <a href="#contact" className="italic border-b-2 border-[#b8935a] pb-1">Let's talk.</a>
+              <a href="/#contact" className="italic border-b-2 border-[#b8935a] pb-1">Let's talk.</a>
             </h3>
           </div>
           <div>
@@ -638,7 +638,7 @@ export function Footer() {
               <li className="flex items-center gap-3"><Clock className="h-4 w-4 text-[#f5f1e8]/60" />Sat · By appointment</li>
               <li className="pt-2 text-[#f5f1e8]/70">Average reply time — under 24 hours.</li>
               <li className="pt-1">
-                <a href="#contact" className="inline-flex items-center gap-2 text-[#b8935a] hover:text-[#f5f1e8] transition">
+                <a href="/#contact" className="inline-flex items-center gap-2 text-[#b8935a] hover:text-[#f5f1e8] transition">
                   Start a project <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </li>
