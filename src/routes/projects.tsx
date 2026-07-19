@@ -189,14 +189,13 @@ function DemoProjects() {
                 className="group block card-lift border border-[#0f2a1d]/10 bg-[#f5f1e8] rounded-sm overflow-hidden h-full flex flex-col"
               >
                 <div className="work-chrome"><span /><span /><span /></div>
-                <div className="aspect-[16/10] bg-[#0f2a1d] relative overflow-hidden">
-                  <iframe
-                    src={d.url}
-                    title={d.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    style={{ transform: "scale(0.5)", transformOrigin: "top left", width: "200%", height: "200%" }}
-                  />
+                <div className="aspect-[16/10] bg-gradient-to-br from-[#0f2a1d] to-[#1a3a2a] relative overflow-hidden flex items-center justify-center p-6">
+                  <div className="text-center">
+                    <div className="font-serif text-2xl md:text-3xl text-[#f5f1e8]">{d.title}</div>
+                    <div className="mt-3 text-[11px] uppercase tracking-[0.14em] text-[#b8935a] break-all">
+                      {d.url.replace(/^https?:\/\//, "")}
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="text-[11px] uppercase tracking-[0.14em] text-[#b8935a]">{d.category}</div>
