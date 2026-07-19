@@ -108,6 +108,7 @@ function Reveal({
 const NAV = [
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
+  { label: "Work", href: "#work" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -163,6 +164,7 @@ function Index() {
       <Marquee />
       <Services />
       <Process />
+      <FeaturedProjects />
       <Why />
       <Testimonials />
       <Contact />
