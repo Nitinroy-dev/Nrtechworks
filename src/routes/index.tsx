@@ -173,6 +173,70 @@ function Index() {
   );
 }
 
+const OUR_WORK = [
+  { title: "Dev & Shiv Event Planners", tag: "Real Client · Live", url: "https://devandshiveventplanners.online/", image: "/dev-and-shiv.jpg" },
+  { title: "Dental Solution", tag: "Demo Template", url: "https://demo-dental-solution.vercel.app/", image: "/demos/dental.jpg" },
+  { title: "Tattoo Artist Studio", tag: "Demo Template", url: "https://Tatoo-artist-demo.vercel.app", image: "/demos/tattoo.jpg" },
+  { title: "GYM Website", tag: "Demo Template", url: "https://ironforge-gym-demo.vercel.app/", image: "/demos/gym.jpg" },
+];
+
+function OurWorkPreview() {
+  return (
+    <section id="our-work" className="bg-[#f5f1e8]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+        <Reveal>
+          <SectionHeader
+            eyebrow="03 · Our Work"
+            title={<>Every project, <em className="italic font-normal">in one place.</em></>}
+          />
+          <p className="mt-6 max-w-2xl text-[#0f2a1d]/70">
+            A quick look at real client work and demo templates you can have us tailor to your brand.
+          </p>
+        </Reveal>
+        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+          {OUR_WORK.map((w, i) => (
+            <Reveal key={w.title} delay={i * 100}>
+              <a
+                href={w.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block card-lift border border-[#0f2a1d]/10 bg-[#0f2a1d] shadow-[0_30px_60px_-30px_rgba(15,42,29,0.45)] overflow-hidden"
+              >
+                <div className="work-chrome"><span /><span /><span /></div>
+                <div className="work-frame aspect-[16/10] bg-[#0f2a1d] overflow-hidden">
+                  <img
+                    src={w.image}
+                    alt={`${w.title} — website by Nr Techworks`}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="flex items-center justify-between p-5 bg-[#f5f1e8]">
+                  <div>
+                    <div className="text-[11px] uppercase tracking-[0.14em] text-[#b8935a]">{w.tag}</div>
+                    <div className="mt-1 font-serif text-xl text-[#0f2a1d]">{w.title}</div>
+                  </div>
+                  <span className="text-sm text-[#0f2a1d]/70 group-hover:text-[#b8935a] transition">Visit ↗</span>
+                </div>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={120}>
+          <div className="mt-12 flex justify-center">
+            <a
+              href="/projects"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-7 py-3 text-sm hover:bg-[#1a3a2a] transition"
+            >
+              See all our work →
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
