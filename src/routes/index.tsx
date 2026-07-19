@@ -105,12 +105,12 @@ function Reveal({
   );
 }
 
-const NAV = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Work", href: "#work" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+export const NAV = [
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Work", href: "/projects" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const SERVICES = [
@@ -164,7 +164,6 @@ function Index() {
       <Marquee />
       <Services />
       <Process />
-      <FeaturedProjects />
       <Why />
       <Testimonials />
       <Contact />
@@ -173,7 +172,7 @@ function Index() {
   );
 }
 
-function Header() {
+export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 bg-[#f5f1e8]/85 backdrop-blur border-b border-[#0f2a1d]/5">
@@ -186,7 +185,7 @@ function Header() {
             <a key={n.href} href={n.href} className="text-sm text-[#0f2a1d]/80 hover:text-[#0f2a1d] transition">{n.label}</a>
           ))}
         </nav>
-        <a href="#contact" className="hidden md:inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-2.5 text-sm hover:bg-[#1a3a2a] transition">
+        <a href="/#contact" className="hidden md:inline-flex items-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-2.5 text-sm hover:bg-[#1a3a2a] transition">
           Book a Call <ArrowUpRight className="h-4 w-4" />
         </a>
         <button className="md:hidden p-2 -mr-2" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
@@ -201,7 +200,7 @@ function Header() {
             {NAV.map((n) => (
               <a key={n.href} href={n.href} onClick={() => setOpen(false)} className="py-2 text-[#0f2a1d]">{n.label}</a>
             ))}
-            <a href="#contact" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-3 text-sm">
+            <a href="/#contact" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#0f2a1d] text-[#f5f1e8] px-5 py-3 text-sm">
               Book a Call <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
@@ -612,7 +611,7 @@ function Field({ label, name, type = "text", required }: { label: string; name: 
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="bg-[#0f2a1d] text-[#f5f1e8]">
       <div className="mx-auto max-w-7xl px-5 md:px-8 pt-20 md:pt-28 pb-8">
