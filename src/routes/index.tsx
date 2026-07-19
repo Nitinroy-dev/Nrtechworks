@@ -108,6 +108,7 @@ function Reveal({
 const NAV = [
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
+  { label: "Work", href: "#work" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -163,6 +164,7 @@ function Index() {
       <Marquee />
       <Services />
       <Process />
+      <FeaturedProjects />
       <Why />
       <Testimonials />
       <Contact />
@@ -346,6 +348,69 @@ function Why() {
 }
 
 function Testimonials() {
+  return (
+    <TestimonialsInner />
+  );
+}
+
+function FeaturedProjects() {
+  return (
+    <section id="work" className="bg-[#f5f1e8]">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
+        <Reveal>
+          <SectionHeader
+            eyebrow="03 · Featured Work"
+            title={<>Real projects, <em className="italic font-normal">real clients.</em></>}
+          />
+        </Reveal>
+        <div className="mt-14 grid lg:grid-cols-2 gap-8 items-center">
+          <Reveal>
+            <a
+              href="https://devandshiveventplanners.online/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block card-lift overflow-hidden border border-[#0f2a1d]/10 bg-[#efe9dc]"
+            >
+              <img
+                src="/dev-and-shiv.jpg"
+                alt="Dev & Shiv Event Planners — luxury event planning website designed and built by Nr Techworks"
+                loading="lazy"
+                className="w-full h-auto block"
+              />
+            </a>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="text-[13px] uppercase tracking-[0.14em] text-[#0f2a1d]/60">Case Study — Luxury Event Planning</div>
+            <h3 className="mt-3 font-serif text-3xl md:text-5xl leading-[1.05]">
+              Dev &amp; Shiv <em className="italic font-normal">Event Planners</em>
+            </h3>
+            <p className="mt-5 text-[#0f2a1d]/75 leading-relaxed">
+              A bespoke website for a real-world luxury event planning company. We designed and
+              built an editorial, high-end brand experience with an interactive "Dream Concept
+              Engine" that lets clients configure occasions, scale, and aesthetic direction — then
+              request a bespoke quote in a single flow.
+            </p>
+            <ul className="mt-6 space-y-2 text-[#0f2a1d]/75">
+              <li>— Brand system, typography, and editorial layout</li>
+              <li>— Interactive concept configurator</li>
+              <li>— Fully responsive, production-hosted</li>
+            </ul>
+            <a
+              href="https://devandshiveventplanners.online/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 bg-[#0f2a1d] text-[#f5f1e8] px-6 py-3 rounded-full text-sm hover:bg-[#1a3a2a] transition"
+            >
+              Visit live site →
+            </a>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsInner() {
   return (
     <section id="testimonials" className="bg-[#efe9dc]">
       <div className="mx-auto max-w-7xl px-5 md:px-8 py-20 md:py-32">
