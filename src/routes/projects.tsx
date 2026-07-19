@@ -189,7 +189,7 @@ function DemoProjects() {
                 href={d.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block card-lift border border-[#0f2a1d]/10 bg-[#f5f1e8] rounded-sm overflow-hidden h-full flex flex-col"
+                className="group block border border-[#0f2a1d]/10 bg-[#f5f1e8] rounded-sm overflow-hidden h-full flex flex-col transition-all duration-500 ease-out hover:-translate-y-3 hover:scale-[1.035] hover:shadow-[0_40px_80px_-30px_rgba(15,42,29,0.55)] hover:ring-1 hover:ring-[#b8935a]/60"
               >
                 <div className="work-chrome"><span /><span /><span /></div>
                 <div className="work-frame aspect-[16/10] bg-[#0f2a1d] relative overflow-hidden">
@@ -197,7 +197,7 @@ function DemoProjects() {
                     src={d.image}
                     alt={`${d.title} — website template preview by Nr Techworks`}
                     loading="lazy"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
