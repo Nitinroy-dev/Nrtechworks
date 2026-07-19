@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Instagram, Linkedin, Twitter } from "lucide-react";
+import { ArrowUpRight, Sparkles, Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 const heroVideoUrl = "/assets/hero.mp4";
@@ -633,21 +633,16 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Elsewhere</div>
-            <ul className="mt-5 space-y-3 text-[15px]">
-              {[
-                { icon: Instagram, label: "Instagram", href: "https://instagram.com/nrtechworks" },
-                { icon: Linkedin, label: "LinkedIn", href: "#" },
-                { icon: Twitter, label: "Twitter / X", href: "#" },
-              ].map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} className="inline-flex items-center gap-3 text-[#f5f1e8]/85 hover:text-[#b8935a] transition">
-                    <s.icon className="h-4 w-4" />
-                    {s.label}
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                </li>
-              ))}
+            <div className="text-xs uppercase tracking-[0.18em] text-[#f5f1e8]/60">Studio Hours</div>
+            <ul className="mt-5 space-y-3 text-[15px] text-[#f5f1e8]/85">
+              <li className="flex items-center gap-3"><Clock className="h-4 w-4 text-[#f5f1e8]/60" />Mon – Fri · 10:00 – 19:00 IST</li>
+              <li className="flex items-center gap-3"><Clock className="h-4 w-4 text-[#f5f1e8]/60" />Sat · By appointment</li>
+              <li className="pt-2 text-[#f5f1e8]/70">Average reply time — under 24 hours.</li>
+              <li className="pt-1">
+                <a href="#contact" className="inline-flex items-center gap-2 text-[#b8935a] hover:text-[#f5f1e8] transition">
+                  Start a project <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              </li>
             </ul>
           </div>
         </div>
